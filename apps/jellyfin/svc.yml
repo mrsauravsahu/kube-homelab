@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: jellyfin
+spec:
+  selector:
+    app: jellyfin
+  type: NodePort
+  ports:
+  - port: 8096
+    nodePort: 30000
+

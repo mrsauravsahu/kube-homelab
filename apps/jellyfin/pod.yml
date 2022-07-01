@@ -1,0 +1,37 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: jellyfin
+  labels:
+    app: jellyfin
+spec:
+  containers:
+  - name: jellyfin
+    image: lscr.io/linuxserver/jellyfin:10.8.1
+    volumeMounts:
+      - mountPath: /config
+        name: homelab
+        subPath: apps/jellyfin/volumes/config
+      - mountPath: /cache
+        name: homelab
+        subPath: apps/jellyfin/volumes/cache
+      - mountPath: /data/tvshows
+        name: passport-v1
+        subPath: Share/TVShows
+      - mountPath: /data/movies
+        name: passport-v1
+        subPath: Share/Movies
+    env:
+    - name: TZ
+      value: "Asia/India"
+    - name: PUID
+      value: "1000"
+    - name: PGID
+      value: "1000"
+  volumes:
+  - name: passport-v1
+    hostPath:
+      path: /mnt/my-passport-drive
+  - name: homelab
+    hostPath:
+      path: /home/mrsauravsahu/homelab
