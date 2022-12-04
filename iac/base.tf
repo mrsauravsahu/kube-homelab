@@ -10,11 +10,6 @@ resource "kubernetes_namespace" "homelab_ns" {
 
     name = var.base.name
   }
-}
 
-output "base" {
-  description = "Base tier of the homelab"
-  value = {
-    ns = var.base.name
-  }
+  provider = k8s
 }

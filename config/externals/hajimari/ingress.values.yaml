@@ -1,0 +1,11 @@
+service:
+  name: hajimari
+  port:
+    number: 3000
+  
+ingress:
+  routePath: /
+
+hosts:
+- name: pi
+- name: pi.local

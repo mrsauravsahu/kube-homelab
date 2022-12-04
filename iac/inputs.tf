@@ -29,6 +29,11 @@ variable "externals" {
   }))
   default = [
     {
+      name = "ingress-nginx",
+      repo = "https://kubernetes.github.io/ingress-nginx",
+      version = "4.4.0"
+    },
+    {
       name = "hajimari"
       repo = "https://hajimari.io"
       version = "1.2.0"
