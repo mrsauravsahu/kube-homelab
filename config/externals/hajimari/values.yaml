@@ -1,0 +1,63 @@
+hajimari:
+  name: Sahu
+  title: Sahu's Home Server
+  lightTheme: gazette
+  darkTheme: tron
+  customThemes: []
+  showSearch: true
+  showGreeting: true
+  showApps: false
+  showAppGroups: true
+  showAppUrls: true
+  showAppInfo: true
+  showAppStatus: true
+  defaultAppIcon: mdi:application
+  showBookmarks: true
+  showGlobalBookmarks: true
+  showBookmarkGroups: true
+  alwaysTargetBlank: false
+  defaultSearchProvider: Google
+  searchProviders:
+    - name: Google
+      token: g
+      icon: simple-icons:google
+      searchUrl: https://www.google.com/search?q={query}
+      url: https://www.google.com
+    - name: DuckDuckGo
+      token: d
+      icon: simple-icons:duckduckgo
+      searchUrl: https://duckduckgo.com/?q={query}
+      url: https://duckduckgo.com
+    - name: IMDB
+      token: i
+      icon: simple-icons:imdb
+      searchUrl: https://www.imdb.com/find?q={query}
+      url: https://www.imdb.com
+    - name: Reddit
+      token: r
+      icon: simple-icons:reddit
+      searchUrl: https://www.reddit.com/search?q={query}
+      url: https://www.reddit.com
+    - name: YouTube
+      token: 'y'
+      icon: simple-icons:youtube
+      searchUrl: https://www.youtube.com/results?search_query={query}
+      url: https://www.youtube.com
+    - name: Spotify
+      token: s
+      icon: simple-icons:spotify
+      searchUrl: hhttps://open.spotify.com/search/{query}
+      url: https://open.spotify.com
+  globalBookmarks:
+    - group: "Applications"
+      bookmarks:
+        - name: "CODE"
+          url: "http://pi/code/"
+        - name: "PAYOBILLS"
+          url: "http://pi/payobills/"
+    - group: "Websites"
+      bookmarks:
+        - name: "GITHUB"
+          url: "https://github.com"
+        - name: "NETFLIX"
+          url: "https://netflix.com"
