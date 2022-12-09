@@ -1,3 +1,6 @@
 .terraform
 *terraform.tfstate
+*terraform.tfstate.tmp
 *terraform.tfstate.backup
+
+plan.json

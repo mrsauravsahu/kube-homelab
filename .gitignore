@@ -1,3 +1,5 @@
+.envrc
+
 volumes
 
-.envrc
+node_modules
