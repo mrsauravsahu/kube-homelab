@@ -26,17 +26,25 @@ variable "externals" {
     name = string
     repo = string
     version = string
+    namespace = optional(string)
   }))
   default = [
     {
-      name = "ingress-nginx",
-      repo = "https://kubernetes.github.io/ingress-nginx",
+      name = "ingress-nginx"
+      repo = "https://kubernetes.github.io/ingress-nginx"
       version = "4.4.0"
     },
     {
       name = "hajimari"
       repo = "https://hajimari.io"
       version = "1.2.0"
+      namespace = "homelab"
+    },
+    {
+      name = "postgresql"
+      repo = "https://cetic.github.io/helm-charts"
+      version = "0.2.3"
+      namespace = "homelab"
     }
   ]
 }
