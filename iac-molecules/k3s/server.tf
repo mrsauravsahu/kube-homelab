@@ -14,6 +14,12 @@ resource "ssh_resource" "install_k3s" {
   private_key        = file(var.host.private_key)
 }
 
+# TODO: replace with some form of wait until k3s is ready
+resource "time_sleep" "wait_k3s_to_get_ready" {
+  depends_on = [ssh_resource.install_k3s]
+  create_duration = "30s"
+}
+
 resource "ssh_resource" "uninstall_k3s" {
   for_each   = {for server in var.servers : server.host => server}
   host            = each.value.host
