@@ -1,3 +1,11 @@
 volumes
 
 .envrc
+
+node_modules
+
+.terraform
+*.tfstate
+*.tfstate.tmp
+*.tfstate.backup
+plan.json
