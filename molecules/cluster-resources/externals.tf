@@ -10,13 +10,16 @@ resource "helm_release" "external_apps" {
   atomic     = true
 }
 
+# output "test" {
+#   value = "${templatefile("./config/externals/hajimari/ingress.values.tftpl", { hosts = var.cluster.hosts })}"
+#  }
 resource "helm_release" "external_ingresses" {
-  for_each     = {for app in helm_release.external_apps.* : app.name => app if fileexists("./config/externals/${app.name}/ingress.values.yaml")}
+  for_each     = {for app in helm_release.external_apps.* : app.name => app if fileexists("./config/externals/${app.name}/ingress.values.tftpl")}
   name       = "${each.value.name}-ingress"
   chart      = "./lib/helm-chart-homelab-ingress"
   namespace  = each.value.namespace
 
-  values = ["${file("./config/externals/${each.value.name}/ingress.values.yaml")}"]
+  values = ["${templatefile("./config/externals/${each.value.name}/ingress.values.tftpl", { hosts = var.cluster.hosts })}"]
 
   atomic     = true
   depends_on = [
