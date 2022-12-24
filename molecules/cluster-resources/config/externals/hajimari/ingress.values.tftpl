@@ -7,5 +7,6 @@ ingress:
   routePath: /
 
 hosts:
-- name: pi
-- name: pi.local
+%{ for host in hosts ~}
+- name: ${host}
+%{ endfor ~}

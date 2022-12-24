@@ -13,10 +13,12 @@ variable "cluster" {
   type = object({
     name = string
     config_path = string
+    hosts = list(string)
   })
   default = {
     name = "default"
     config_path = "/etc/rancher/k3s/k3s.yaml"
+    hosts = []
   }
 }
 
