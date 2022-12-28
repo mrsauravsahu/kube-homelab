@@ -13,12 +13,17 @@ variable "cluster" {
   type = object({
     name = string
     config_path = string
+    host = string
     hosts = list(string)
   })
   default = {
     name = "default"
-    config_path = "/etc/rancher/k3s/k3s.yaml"
-    hosts = []
+    config_path = "../../config/kubeconfig"
+    host = "https://192.168.0.100:6443"
+    hosts = [
+      "pi",
+      "pi.local"
+    ]
   }
 }
 
