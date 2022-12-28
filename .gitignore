@@ -9,3 +9,5 @@ node_modules
 *.tfstate.tmp
 *.tfstate.backup
 plan.json
+
+config
