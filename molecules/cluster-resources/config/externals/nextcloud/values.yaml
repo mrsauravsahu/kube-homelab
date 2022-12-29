@@ -1,0 +1,4 @@
+image:
+  tag: 25.0.2-apache
+externalDatabase:
+  host: postgresql1.playground.svc.cluster.local:5432

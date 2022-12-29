@@ -1,15 +1,16 @@
 resource "helm_release" "external_apps" {
-  count     = length(var.externals)
-  repository = var.externals[count.index].repo
-  name       = var.externals[count.index].name
-  chart      = var.externals[count.index].name
-  namespace  = var.externals[count.index].namespace != null ? var.externals[count.index].namespace : var.externals[count.index].name
+  for_each = { for external in var.externals : external.name => external }
+  repository = each.value.repo
+  name       = each.value.name
+  chart      = each.value.name
+  namespace  = each.value.namespace != null ? each.value.namespace : each.value.name
   create_namespace = true
-  values = fileexists("./config/externals/${var.externals[count.index].name}/values.yaml") == true ? ["${file("./config/externals/${var.externals[count.index].name}/values.yaml")}"] : []
+  values = fileexists("./config/externals/${each.value.name}/values.yaml") == true ? ["${file("./config/externals/${each.value.name}/values.yaml")}"] : []
+
 }
 
 resource "helm_release" "external_ingresses" {
-  for_each     = {for app in helm_release.external_apps.* : app.name => app if fileexists("./config/externals/${app.name}/ingress.values.tftpl")}
+  for_each     = {for app in helm_release.external_apps : app.name => app if fileexists("./config/externals/${app.name}/ingress.values.tftpl")}
   name       = "${each.value.name}-ingress"
   chart      = "./lib/helm-chart-homelab-ingress"
   namespace  = each.value.namespace
