@@ -6,7 +6,6 @@ resource "helm_release" "external_apps" {
   namespace  = each.value.namespace != null ? each.value.namespace : each.value.name
   create_namespace = true
   values = fileexists("./config/externals/${each.value.name}/values.yaml") == true ? ["${file("./config/externals/${each.value.name}/values.yaml")}"] : []
-
 }
 
 resource "helm_release" "external_ingresses" {
