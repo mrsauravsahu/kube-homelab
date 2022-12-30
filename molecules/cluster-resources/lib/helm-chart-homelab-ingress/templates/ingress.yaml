@@ -2,6 +2,11 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: {{ $.Values.service.name }}
+  annotations:
+    {{- if $.Values.flags.rewrite }}
+    nginx.ingress.kubernetes.io/rewrite-target: /$2
+    {{- end }}
+    nginx.ingress.kubernetes.io/preserve-trailing-slash: "false"
 spec:
   ingressClassName: nginx
   rules:

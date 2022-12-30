@@ -1,0 +1,15 @@
+flags:
+  rewrite: true
+
+service:
+  name: nextcloud
+  port:
+    number: 8080
+  
+ingress:
+  routePath: /nextcloud(/|$)(.*)
+
+hosts:
+%{ for host in hosts ~}
+- name: ${host}
+%{ endfor ~}
