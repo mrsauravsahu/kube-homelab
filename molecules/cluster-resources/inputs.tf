@@ -16,14 +16,6 @@ variable "cluster" {
     host = string
     hosts = list(string)
   })
-  default = {
-    name = "default"
-    config_path = "../../config/kubeconfig"
-    host = "https://192.168.0.100:6443"
-    hosts = [
-      "sahu.in"
-    ]
-  }
 }
 
 variable "externals" {
