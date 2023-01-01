@@ -1,5 +1,4 @@
 terraform {
-
   required_providers {
     helm = {
       source = "hashicorp/helm"
@@ -10,6 +9,12 @@ terraform {
       source = "hashicorp/kubernetes"
       version = "2.12.0"
     }
+  }
+
+  backend "http" {
+    address        = "http://localhost:6061?type=git&repository=https://github.com/mrsauravsahu/tfstate-homelab&ref=main&state=state-cluster-resources.json"
+    lock_address   = "http://localhost:6061?type=git&repository=https://github.com/mrsauravsahu/tfstate-homelab&ref=main&state=state-cluster-resources.json"
+    unlock_address = "http://localhost:6061?type=git&repository=https://github.com/mrsauravsahu/tfstate-homelab&ref=main&state=state-cluster-resources.json"
   }
 }
 
