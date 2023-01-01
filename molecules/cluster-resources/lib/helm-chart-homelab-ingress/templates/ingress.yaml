@@ -11,12 +11,12 @@ spec:
   ingressClassName: nginx
   rules:
   {{- range $host := .Values.hosts }}
-  - http:
-      {{- if (($.Values.ingress).subdomain) }}
-      host: {{ (printf "%s.%s" $.Values.ingress.subdomain $host.name) | quote }}
-      {{- else }}
-      host: {{ $host.name | quote }}
-      {{- end }}
+  {{- if (($.Values.ingress).subdomain) }}
+  - host: {{ (printf "%s.%s" $.Values.ingress.subdomain $host.name) | quote }}
+  {{- else }}
+  - host: {{ $host.name | quote }}
+  {{- end }}
+    http:
       paths:
       - path: {{ $.Values.ingress.routePath }}
         pathType: Prefix
