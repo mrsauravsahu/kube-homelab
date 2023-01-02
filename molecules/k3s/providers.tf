@@ -9,8 +9,14 @@ terraform {
       source = "hashicorp/time"
       version = "0.9.1"
     }
+
+    remote = {
+      source = "tenstad/remote"
+      version = "0.1.1"
+    }
   }
 }
 
 provider "ssh" { }
 provider "time" { }
+provider "remote" { }

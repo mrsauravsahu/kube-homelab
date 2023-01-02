@@ -1,5 +1,5 @@
 resource "ssh_resource" "install_k3s" {
-  for_each   = {for server in var.servers : server.host => server}
+  for_each   = local.servers
   host            = each.value.host
   user = each.value.user
   host_user = var.host.user
