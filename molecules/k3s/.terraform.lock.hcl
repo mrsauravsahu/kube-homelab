@@ -46,6 +46,7 @@ provider "registry.terraform.io/tenstad/remote" {
   version     = "0.1.1"
   constraints = "0.1.1"
   hashes = [
+    "h1:plZoRVRa34FxvBBJ5ykNndyIk9nqTeuSJSTJKt/aqYk=",
     "h1:x+VrpVS5+DG1ARCzq8m6yVylQYox1WUqGLR1VAgf+CE=",
     "zh:00dab99d546d4f74b9b9a4aa23e5e4562edee95f815d284c1ffda92bab6e8b9f",
     "zh:12475396d20d34ccdb5132caf0a50378ffc46f28fa8c6e5b867ac505ea6a776c",

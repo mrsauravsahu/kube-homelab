@@ -11,3 +11,5 @@ node_modules
 plan.json
 
 /config
+
+*inputs.tfvars
