@@ -1,5 +1,4 @@
 terraform {
-
   required_providers {
     helm = {
       source = "hashicorp/helm"
@@ -11,6 +10,8 @@ terraform {
       version = "2.12.0"
     }
   }
+
+  backend "http" { }
 }
 
 provider "helm" {
