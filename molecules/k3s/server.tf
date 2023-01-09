@@ -24,9 +24,13 @@ resource "ssh_resource" "uninstall_k3s" {
   user = each.value.user
   host_user = var.host.user
   commands            = [
-    "k3s-killall.sh",
-    "k3s-uninstall.sh",
-    "docker ps -q | xargs docker stop && docker system prune -f"
-    ]
+    <<EOF
+    echo '
+    k3s-killall.sh
+    k3s-uninstall.sh
+    ([ "$(docker ps -q)" != "" ] && $(docker ps -q | xargs docker stop && docker system prune -f)) || true
+    ' | bash
+    EOF
+  ]
   private_key        = file(var.host.private_key)
 }
