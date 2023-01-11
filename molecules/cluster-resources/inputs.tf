@@ -63,7 +63,24 @@ variable "externals" {
       repo = "https://mojo2600.github.io/pihole-kubernetes/",
       version = "2.11.0",
       namespace = "homelab"
+    },
+    {
+      name = "keycloak",
+      repo = "https://codecentric.github.io/helm-charts",
+      version = "18.4.0",
+      namespace = "homelab"
+    },
+    {
+      name = "prometheus",
+      repo = "https://prometheus-community.github.io/helm-charts",
+      version = "19.3.1",
+      namespace = "homelab"
+    },
+    {
+      name = "grafana",
+      repo = "https://grafana.github.io/helm-charts",
+      version = "6.49.0",
+      namespace = "homelab"
     }
-    
   ]
 }

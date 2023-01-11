@@ -1,0 +1,20 @@
+flags:
+  rewrite: false
+
+service:
+  name: grafana
+  port:
+    number: 80
+
+annotations:
+  hajimari.io/enable: "true"
+  hajimari.io/appName: "grafana"
+
+ingress:
+  subdomain: grafana
+  routePath: /
+
+hosts:
+%{ for host in hosts ~}
+- name: ${host}
+%{ endfor ~}
