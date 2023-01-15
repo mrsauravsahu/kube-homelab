@@ -67,7 +67,7 @@ variable "externals" {
     {
       name = "keycloak",
       repo = "https://codecentric.github.io/helm-charts",
-      version = "18.4.0",
+      version = "20.0.3",
       namespace = "homelab"
     },
     {
@@ -79,8 +79,8 @@ variable "externals" {
     {
       name = "grafana",
       repo = "https://grafana.github.io/helm-charts",
-      version = "6.49.0",
+      version = "9.3.1",
       namespace = "homelab"
-    }
+    },
   ]
 }
