@@ -5,7 +5,11 @@ service:
   name: pihole-web
   port:
     number: 80
-  
+
+annotations:
+  hajimari.io/enable: "true"
+  hajimari.io/appName: "pihole"
+
 ingress:
   subdomain: pihole
   routePath: /

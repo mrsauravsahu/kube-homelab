@@ -1,4 +1,5 @@
 terraform {
+  required_version = ">=1.3.0"
 
   required_providers {
     helm = {
@@ -11,6 +12,8 @@ terraform {
       version = "2.12.0"
     }
   }
+
+  backend "http" { }
 }
 
 provider "helm" {

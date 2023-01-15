@@ -1,12 +1,16 @@
 hajimari:
   name: Sahu
   title: Sahu's Home Server
-  lightTheme: gazette
-  darkTheme: tron
-  customThemes: []
+  lightTheme: mrsauravsahu
+  darkTheme: mrsauravsahu
+  customThemes:
+  - name: mrsauravsahu
+    backgroundColor: "#333"
+    primaryColor: "#DDD"
+    accentColor: "#80b3ff"
   showSearch: true
   showGreeting: true
-  showApps: false
+  showApps: true
   showAppGroups: true
   showAppUrls: true
   showAppInfo: true
@@ -17,6 +21,9 @@ hajimari:
   showBookmarkGroups: true
   alwaysTargetBlank: false
   defaultSearchProvider: Google
+  namespaceSelector:
+    matchNames:
+    - "homelab"
   searchProviders:
     - name: Google
       token: g
