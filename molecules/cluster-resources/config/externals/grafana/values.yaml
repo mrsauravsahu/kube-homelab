@@ -1,6 +1,3 @@
-Template:
-  BasePath: "/Users/mrsauravsahu/Documents/personal/code/homelab/molecules/cluster-resources"
-
 global:
   # To help compatibility with other charts which use global.imagePullSecrets.
   # Allow either an array of {name: pullSecret} maps (k8s-style), or an array of strings (more common helm-style).
@@ -517,10 +514,14 @@ plugins: []
 ## Configure grafana datasources
 ## ref: http://docs.grafana.org/administration/provisioning/#datasources
 ##
-datasources:
-- name: prometheus
-  type: prometheus
-  url: "http://prometheus-server"
+datasources.yaml:
+  apiVersion: 1
+  datasources:
+  - name: prometheus
+    type: prometheus
+    url: "http://prometheus-server"
+    isDefault: true
+
 #  datasources.yaml:
 #    apiVersion: 1
 #    datasources:
