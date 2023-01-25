@@ -18,7 +18,6 @@ terraform {
 
 provider "helm" {
   kubernetes {
-    host = var.cluster.host
     config_path = var.cluster.config_path
   }
 }
