@@ -14,3 +14,7 @@ extraEnv: |
     value: 
   - name: DB_PASSWORD
     value: 
+  - name: KEYCLOAK_USER
+    value: 
+  - name: KEYCLOAK_PASSWORD
+    value: 
