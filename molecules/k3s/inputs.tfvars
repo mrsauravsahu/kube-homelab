@@ -1,10 +1,5 @@
-host = {
-  private_key = "~/.ssh/personal"
-  user = "mrsauravsahu"
-}
-
 servers = [ {
-  host = "192.168.0.100"
-  private_key = "~/.ssh/personal"
-  user = "mrsauravsahu"
+  host = "127.0.0.1"
+  private_key = "~/.ssh/id_rsa"
+  user = "root"
 } ]
