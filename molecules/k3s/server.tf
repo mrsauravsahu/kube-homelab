@@ -11,11 +11,7 @@ resource "ssh_resource" "install_k3s" {
   timeout = "10m"
 }
 
-# TODO: replace with some form of wait until k3s is ready
-resource "time_sleep" "wait_k3s_to_get_ready" {
-  depends_on      = [ssh_resource.install_k3s]
-  create_duration = "30s"
-}
+# Note: Removed waiting for k3s server to be ready
 
 resource "ssh_resource" "uninstall_k3s" {
   for_each    = { for server in var.servers : server.host => server }
