@@ -1,0 +1,20 @@
+flags:
+  rewrite: false
+
+service:
+  name: keycloak-http
+  port:
+    number: 80
+
+annotations:
+  hajimari.io/enable: "true"
+  hajimari.io/appName: "Users - Keycloak"
+
+ingress:
+  subdomain: users
+  routePath: /
+
+hosts:
+%{ for host in hosts ~}
+- name: ${host}
+%{ endfor ~}

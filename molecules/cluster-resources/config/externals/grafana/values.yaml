@@ -518,9 +518,9 @@ datasources:
   datasources.yaml:
     apiVersion: 1
     datasources:
-    - name: prometheus
+    - name: thanos
       type: prometheus
-      url: "http://prometheus-server"
+      url: "http://thanos-query.homelab.svc.cluster.local:10902"
       access: proxy
       isDefault: true
 

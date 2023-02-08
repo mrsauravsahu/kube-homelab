@@ -70,10 +70,17 @@ variable "externals" {
       version = "20.0.3",
       namespace = "homelab"
     },
+    # {
+    #   name = "prometheus",
+    #   repo = "https://prometheus-community.github.io/helm-charts",
+    #   version = "19.3.1",
+    #   namespace = "homelab"
+    # },
+    # Note: Using Thanos for HA instead of Prometheus directly
     {
-      name = "prometheus",
-      repo = "https://prometheus-community.github.io/helm-charts",
-      version = "19.3.1",
+      name = "thanos",
+      repo = "https://stevehipwell.github.io/helm-charts/",
+      version = "1.10.1",
       namespace = "homelab"
     },
     {
