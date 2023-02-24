@@ -77,6 +77,18 @@ variable "externals" {
       namespace = "homelab"
     },
     {
+      name = "cert-manager",
+      repo = "https://charts.jetstack.io",
+      version = "v1.11.0",
+      namespace = "homelab"
+    },
+    {
+      name = "opentelemetry-collector",
+      repo = "https://open-telemetry.github.io/opentelemetry-helm-charts"
+      version = "v0.72.0",
+      namespace = "homelab"
+    },
+    {
       name = "grafana",
       repo = "https://grafana.github.io/helm-charts",
       version = "9.3.1",
