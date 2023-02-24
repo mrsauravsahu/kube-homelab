@@ -94,5 +94,11 @@ variable "externals" {
       version = "9.3.1",
       namespace = "homelab"
     },
+    {
+      name = "loki",
+      repo = "https://grafana.github.io/loki/charts",
+      version = "2.1.1",
+      namespace = "homelab"
+    }
   ]
 }

@@ -523,6 +523,10 @@ datasources:
       url: "http://prometheus-server"
       access: proxy
       isDefault: true
+    - name: loki
+      type: loki
+      url: "http://loki:3100"
+      access: proxy
 
 #  datasources.yaml:
 #    apiVersion: 1
