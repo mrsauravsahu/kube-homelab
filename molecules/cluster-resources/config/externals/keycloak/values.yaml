@@ -1,2 +1,21 @@
 postgresql:
   enabled: false
+  
+extraEnv: |
+  - name: DB_VENDOR
+    value: postgres
+  - name: DB_ADDR
+    value: postgresql
+  - name: DB_PORT
+    value: "5432"
+  - name: DB_DATABASE
+    value: postgres
+  - name: DB_USER
+    value: postgres
+  - name: DB_PASSWORD
+    value: postgres
+  - name: KEYCLOAK_USER
+    value: root
+  - name: KEYCLOAK_PASSWORD
+    value: rootPassword
+
