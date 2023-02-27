@@ -64,12 +64,12 @@ variable "externals" {
       version = "2.11.0",
       namespace = "homelab"
     },
-    {
-      name = "keycloak",
-      repo = "https://codecentric.github.io/helm-charts",
-      version = "20.0.3",
-      namespace = "homelab"
-    },
+    # {
+    #   name = "keycloak",
+    #   repo = "https://codecentric.github.io/helm-charts",
+    #   version = "20.0.3",
+    #   namespace = "homelab"
+    # },
     {
       name = "prometheus",
       repo = "https://prometheus-community.github.io/helm-charts",
@@ -95,7 +95,7 @@ variable "externals" {
       namespace = "homelab"
     },
     {
-      name = "loki",
+      name = "loki-stack",
       repo = "https://grafana.github.io/loki/charts",
       version = "2.1.1",
       namespace = "homelab"

@@ -1,2 +1,28 @@
 mode: "deployment"
 
+config:
+  # receivers:
+  #   filelog:
+  #     include: [/var/log/*.log]
+
+  # processors:
+  # attributes:
+  #   actions:
+  #     - action: insert
+  #       key: log_file_name
+  #       from_attribute: log.file.name
+  #     - action: insert
+  #       key: loki.attribute.labels
+  #       value: log_file_name
+
+  exporters:
+    # logging:
+      # logLevel: debug
+    loki:
+      endpoint: "http://loki:3100/loki/api/v1/push"
+  service:
+    pipelines:
+      logs:
+        # receivers: [filelog]
+        # processors: [attributes]
+        exporters: [loki]
