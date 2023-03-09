@@ -1,0 +1,20 @@
+flags:
+  rewrite: false
+
+service:
+  name: kafka
+  port:
+    number: 9092
+
+annotations:
+  hajimari.io/enable: "true"
+  hajimari.io/appName: "kafka"
+
+ingress:
+  subdomain: kafka
+  routePath: /
+
+hosts:
+%{ for host in hosts ~}
+- name: ${host}
+%{ endfor ~}

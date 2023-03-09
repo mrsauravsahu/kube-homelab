@@ -13,7 +13,7 @@ terraform {
     }
   }
 
-  backend "http" { }
+  # backend "http" { }
 }
 
 provider "helm" {
