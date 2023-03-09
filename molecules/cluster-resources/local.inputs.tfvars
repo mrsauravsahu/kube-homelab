@@ -1,6 +1,6 @@
 cluster = {
-  name = "default"
-  config_path = "../../config/127.0.0.1.kubeconfig"
+  name = "colima-justdocker"
+  config_path = "~/.kube/config"
   host = "https://127.0.0.1:6443"
   hosts = [
     "127.0.0.1.nip.io"
@@ -50,18 +50,18 @@ externals = [
     #   version = "20.0.3",
     #   namespace = "homelab"
     # },
-    {
-      name = "prometheus",
-      repo = "https://prometheus-community.github.io/helm-charts",
-      version = "19.3.1",
-      namespace = "homelab"
-    },
-    {
-      name = "grafana-agent-operator",
-      repo = "https://grafana.github.io/helm-charts",
-      version = "9.3.1",
-      namespace = "homelab"
-    },
+    #{
+    #  name = "prometheus",
+    #  repo = "https://prometheus-community.github.io/helm-charts",
+    #  version = "19.3.1",
+    #  namespace = "homelab"
+    #},
+    #{
+    #  name = "grafana-agent-operator",
+    #  repo = "https://grafana.github.io/helm-charts",
+    #  version = "9.3.1",
+    #  namespace = "homelab"
+    #},
     {
       name = "grafana",
       repo = "https://grafana.github.io/helm-charts",
@@ -81,4 +81,28 @@ externals = [
       version = "v0.72.0",
       namespace = "homelab"
     },
+    #{
+    #  name = "otel-collector-template-monorepo-dev",
+    #  chart_name = "opentelemetry-collector",
+    #  repo = "https://open-telemetry.github.io/opentelemetry-helm-charts"
+    #  version = "v0.72.0",
+    #  namespace = "template-monorepo-dev"
+    #},
+   #{
+   #   name = "opentelemetry-collector",
+   #   repo = "https://open-telemetry.github.io/opentelemetry-helm-charts"
+   #   version = "v0.72.0",
+   #   namespace = "homelab"
+   # },
+  #{
+  #    name = "kafka",
+  #    repo = "https://charts.bitnami.com/bitnami",
+  #    version = "21.3.0"
+  #},
+  {
+    name = "zeebe-full-helm",
+    repo = "https://helm.camunda.io"
+    version = "1.3.5",
+    namespace = "homelab"
+  },
   ]

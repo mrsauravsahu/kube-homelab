@@ -22,16 +22,17 @@ variable "externals" {
   description = "Details about external apps to install"
   type = list(object({
     name = string
+    chart_name = optional(string)
     repo = string
     version = string
     namespace = optional(string)
   }))
   default = [
-    {
-      name = "ingress-nginx"
-      repo = "https://kubernetes.github.io/ingress-nginx"
-      version = "4.4.0"
-    },
+    # {
+    #   name = "ingress-nginx"
+    #   repo = "https://kubernetes.github.io/ingress-nginx"
+    #   version = "4.4.0"
+    # },
     {
       name = "hajimari"
       repo = "https://hajimari.io"
@@ -39,18 +40,37 @@ variable "externals" {
       namespace = "homelab"
     },
     {
-      name = "postgresql"
-      repo = "https://cetic.github.io/helm-charts"
-      version = "0.2.3"
-      namespace = "homelab"
-    },
-
-    {
       name = "pihole",
       repo = "https://mojo2600.github.io/pihole-kubernetes/",
       version = "2.11.0",
       namespace = "homelab"
     },
+    # {
+    #   name = "postgresql"
+    #   repo = "https://cetic.github.io/helm-charts"
+    #   version = "0.2.3"
+    #   namespace = "homelab"
+    # },
+    // TODO: nextcloud fails due to slow startup, need to figure this out
+    # {
+    #   name = "nextcloud"
+    #   repo = "https://nextcloud.github.io/helm"
+    #   version = "3.3.6"
+    #   namespace = "homelab"
+    # },
+    # {
+    #   name = "coredns",
+    #   repo = "https://coredns.github.io/helm",
+    #   version = "1.19.7",
+    #   namespace = "homelab"
+    # },
+    # {
+    #   name = "keycloak",
+    #   repo = "https://codecentric.github.io/helm-charts",
+    #   version = "20.0.3",
+    #   namespace = "homelab"
+    # },
+>>>>>>> 7f05c1c (feat: helm charts for running local setup)
     {
       name = "prometheus",
       repo = "https://prometheus-community.github.io/helm-charts",
