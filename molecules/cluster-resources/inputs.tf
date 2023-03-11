@@ -19,14 +19,13 @@ variable "cluster" {
 }
 
 variable "externals" {
-  description = "Details about external items to install"
+  description = "Details about external apps to install"
   type = list(object({
     name = string
     repo = string
     version = string
     namespace = optional(string)
   }))
-  // Feel free to move the applications arround, the order in the array does not matter
   default = [
     {
       name = "ingress-nginx"
@@ -45,29 +44,11 @@ variable "externals" {
       version = "0.2.3"
       namespace = "homelab"
     },
-    // TODO: nextcloud fails due to slow startup, need to figure this out
-    # {
-    #   name = "nextcloud"
-    #   repo = "https://nextcloud.github.io/helm"
-    #   version = "3.3.6"
-    #   namespace = "homelab"
-    # },
-    # {
-    #   name = "coredns",
-    #   repo = "https://coredns.github.io/helm",
-    #   version = "1.19.7",
-    #   namespace = "homelab"
-    # }
+
     {
       name = "pihole",
       repo = "https://mojo2600.github.io/pihole-kubernetes/",
       version = "2.11.0",
-      namespace = "homelab"
-    },
-    {
-      name = "keycloak",
-      repo = "https://codecentric.github.io/helm-charts",
-      version = "20.0.3",
       namespace = "homelab"
     },
     {
@@ -79,8 +60,49 @@ variable "externals" {
     {
       name = "grafana",
       repo = "https://grafana.github.io/helm-charts",
-      version = "9.3.1",
+      version = "0.2.3",
       namespace = "homelab"
     },
+    {
+      name = "loki",
+      repo = "https://grafana.github.io/loki/charts",
+      version = "2.1.1",
+      namespace = "homelab"
+    },
+    # https://grafana.com/blog/2022/06/23/how-to-send-logs-to-grafana-loki-with-the-opentelemetry-collector-using-fluent-forward-and-filelog-receivers
+    {
+      name = "opentelemetry-collector",
+      repo = "https://open-telemetry.github.io/opentelemetry-helm-charts"
+      version = "v0.72.0",
+      namespace = "homelab"
+    },
+    # TODO: I don't think this is needed, need to check
+    # {
+    #   name = "grafana-agent-operator",
+    #   repo = "https://grafana.github.io/helm-charts",
+    #   version = "9.3.1",
+    #   namespace = "homelab"
+    # },
+    # TODO: nextcloud fails due to slow startup, need to figure this out
+    # {
+    #   name = "nextcloud"
+    #   repo = "https://nextcloud.github.io/helm"
+    #   version = "3.3.6"
+    #   namespace = "homelab"
+    # },
+    # TODO: Use coredns for DNS. Still not sure about this
+    # {
+    #   name = "coredns",
+    #   repo = "https://coredns.github.io/helm",
+    #   version = "1.19.7",
+    #   namespace = "homelab"
+    # },
+    # TODO: Add configuration for this
+    # {
+    #   name = "keycloak",
+    #   repo = "https://codecentric.github.io/helm-charts",
+    #   version = "20.0.3",
+    #   namespace = "homelab"
+    # },
   ]
 }
