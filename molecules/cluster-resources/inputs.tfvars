@@ -2,7 +2,7 @@ cluster = {
   name = "default"
   config_path = "~/.kube/config"
   host = "https://127.0.0.1:6443"
-  hosts = ["127.0.0.1.nip.io"]
+  hosts = ["127.0.0.1.nip.io", "local"]
 }
 
 externals = [
@@ -11,18 +11,18 @@ externals = [
       repo = "https://kubernetes.github.io/ingress-nginx"
       version = "4.4.0"
     },
-    {
-      name = "hajimari"
-      repo = "https://hajimari.io"
-      version = "1.2.0"
-      namespace = "homelab"
-    },
-    {
-      name = "postgresql"
-      repo = "https://cetic.github.io/helm-charts"
-      version = "0.2.3"
-      namespace = "homelab"
-    },
+    # {
+    #   name = "hajimari"
+    #   repo = "https://hajimari.io"
+    #   version = "1.2.0"
+    #   namespace = "homelab"
+    # },
+    # {
+    #   name = "postgresql"
+    #   repo = "https://cetic.github.io/helm-charts"
+    #   version = "0.2.3"
+    #   namespace = "homelab"
+    # },
     // TODO: nextcloud fails due to slow startup, need to figure this out
     # {
     #   name = "nextcloud"
@@ -79,4 +79,10 @@ externals = [
       version = "v0.72.0",
       namespace = "homelab"
     },
+    {
+      name = "fluent-bit",
+      repo = "https://fluent.github.io/helm-charts"
+      version = "2.0.9",
+      namespace = "homelab"
+    }
   ]

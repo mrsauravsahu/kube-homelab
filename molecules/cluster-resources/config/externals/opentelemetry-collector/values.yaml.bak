@@ -2,8 +2,8 @@ mode: "deployment"
 
 config:
   receivers:
-    filelog:
-      include: [/var/log/*.log]
+    fluentforward:
+      endpoint: "fluent-bit.homelab.svc.cluster.local:24224"
 
   processors:
     batch: {}
@@ -22,6 +22,6 @@ config:
   service:
     pipelines:
       logs:
-        receivers: [filelog]
+        receivers: [fluentforward]
         processors: [batch]
         exporters: [loki]
