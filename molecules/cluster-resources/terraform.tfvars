@@ -1,5 +1,5 @@
 cluster = {
-  name = "colima-justdocker"
+  name = "docker-desktop"
   config_path = "~/.kube/config"
   host = "https://127.0.0.1:6443"
   hosts = [
@@ -8,23 +8,23 @@ cluster = {
 }
 
 externals = [
-      {
+    {
       name = "ingress-nginx"
       repo = "https://kubernetes.github.io/ingress-nginx"
       version = "4.4.0"
     },
-    # {
-    #   name = "hajimari"
-    #   repo = "https://hajimari.io"
-    #   version = "1.2.0"
-    #   namespace = "homelab"
-    # },
-    # {
-    #   name = "postgresql"
-    #   repo = "https://cetic.github.io/helm-charts"
-    #   version = "0.2.3"
-    #   namespace = "homelab"
-    # },
+    #{
+    #  name = "hajimari"
+    #  repo = "https://hajimari.io"
+    #  version = "1.2.0"
+    #  namespace = "homelab"
+    #},
+    #{
+    #  name = "postgresql"
+    #  repo = "https://cetic.github.io/helm-charts"
+    #  version = "0.2.3"
+    #  namespace = "homelab"
+    #},
     // TODO: nextcloud fails due to slow startup, need to figure this out
     # {
     #   name = "nextcloud"
@@ -50,18 +50,12 @@ externals = [
     #   version = "20.0.3",
     #   namespace = "homelab"
     # },
-    #{
-    #  name = "prometheus",
-    #  repo = "https://prometheus-community.github.io/helm-charts",
-    #  version = "19.3.1",
-    #  namespace = "homelab"
-    #},
-    #{
-    #  name = "grafana-agent-operator",
-    #  repo = "https://grafana.github.io/helm-charts",
-    #  version = "9.3.1",
-    #  namespace = "homelab"
-    #},
+    {
+     name = "prometheus",
+     repo = "https://prometheus-community.github.io/helm-charts",
+     version = "19.3.1",
+     namespace = "homelab"
+    },
     {
       name = "grafana",
       repo = "https://grafana.github.io/helm-charts",
@@ -79,15 +73,8 @@ externals = [
       name = "opentelemetry-collector",
       repo = "https://open-telemetry.github.io/opentelemetry-helm-charts"
       version = "v0.72.0",
-      namespace = "homelab"
+      namespace = "payobills-dev"
     },
-    #{
-    #  name = "otel-collector-template-monorepo-dev",
-    #  chart_name = "opentelemetry-collector",
-    #  repo = "https://open-telemetry.github.io/opentelemetry-helm-charts"
-    #  version = "v0.72.0",
-    #  namespace = "template-monorepo-dev"
-    #},
    #{
    #   name = "opentelemetry-collector",
    #   repo = "https://open-telemetry.github.io/opentelemetry-helm-charts"
@@ -99,10 +86,16 @@ externals = [
   #    repo = "https://charts.bitnami.com/bitnami",
   #    version = "21.3.0"
   #},
-  {
-    name = "zeebe-full-helm",
-    repo = "https://helm.camunda.io"
-    version = "1.3.5",
-    namespace = "homelab"
-  },
+  # {
+  #   name = "zeebe-full-helm",
+  #   repo = "https://helm.camunda.io"
+  #   version = "1.3.5",
+  #   namespace = "homelab"
+  # },
+  #{
+  #  name = "dapr",
+  #  repo = "https://dapr.github.io/helm-charts/",
+  #  version = "1.10.5",
+  #  namespace = "dapr-system"
+  #}
   ]
