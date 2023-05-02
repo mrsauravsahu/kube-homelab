@@ -1,4 +1,4 @@
-# tcp:
-#   53: "homelab/pihole-dns-tcp:53"
-# udp:
-#   53: "homelab/pihole-dns-udp:53"
+tcp:
+  53: "homelab/pihole-dns-tcp:53"
+udp:
+  53: "homelab/pihole-dns-udp:53"
