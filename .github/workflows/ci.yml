@@ -32,9 +32,9 @@ jobs:
         working-directory: molecules/cluster-resources
         run: terraform init
 
-      - name: Terraform Plan
+      - name: Terraform Apply
         env:
-          TF_VAR_cluster: '{ name = "default", config_path = "~/.kube/config", host = "https://127.0.0.1:6443", hosts = [ "127.0.0.1.nip.io" ]}}'
+          TF_VAR_cluster: '{ name = "default", config_path = "~/.kube/config", host = "https://127.0.0.1:6443", hosts = [ "127.0.0.1.nip.io" ] }'
         working-directory: molecules/cluster-resources
         run: terraform apply
 
