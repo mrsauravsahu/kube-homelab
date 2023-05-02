@@ -1,0 +1,38 @@
+name: Terraform Plan
+
+on:
+  pull_request:
+    branches:
+      - main
+    paths:
+      - 'molecules/cluster-resources/**'
+
+jobs:
+  terraform-plan:
+    name: Terraform Plan
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v2
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v1
+        with:
+          terraform_version: $(cat .terraform-version)
+
+      - uses: debianmaster/actions-k3s@master
+        id: k3s
+        with:
+          version: v1.27.1-k3s1
+
+      - name: Check K3s Cluster Status
+        run: kubectl get nodes
+
+      - name: Terraform Init
+        working-directory: molecules/cluster-resources
+        run: terraform init
+
+      - name: Terraform Plan
+        working-directory: molecules/cluster-resources
+        run: terraform apply
+
