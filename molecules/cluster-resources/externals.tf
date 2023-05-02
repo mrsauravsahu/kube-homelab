@@ -2,7 +2,7 @@ resource "helm_release" "external_apps" {
   for_each = { for external in var.externals : external.name => external }
   repository = each.value.repo
   name       = each.value.name
-  chart      = coalesce(each.value.chart_name, each.value.name)
+  chart      = each.value.name
   namespace  = each.value.namespace != null ? each.value.namespace : each.value.name
   create_namespace = true
   values = fileexists("./config/externals/${each.value.name}/values.yaml") == true ? ["${file("./config/externals/${each.value.name}/values.yaml")}"] : []

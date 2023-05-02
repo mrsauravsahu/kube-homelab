@@ -1,5 +1,0 @@
-nodeExporter:
-  # hostRootfs: false
-  hostRootFsMount:
-    enabled: false
-    mountPropagation: HostToContainer
