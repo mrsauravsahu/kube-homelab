@@ -28,6 +28,11 @@ jobs:
       - name: Check K3s Cluster Status
         run: kubectl get nodes
 
+      - name: Check K3s Cluster Status
+        env: 
+          KUBECONFIG_PATH: ${{ steps.k3s.outputs.kubeconfig }}
+        run: cat ${KUBECONFIG_PATH} 
+        
       - name: Terraform Init
         working-directory: molecules/cluster-resources
         run: terraform init
