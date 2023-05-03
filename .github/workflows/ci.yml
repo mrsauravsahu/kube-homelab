@@ -34,7 +34,7 @@ jobs:
 
       - name: Terraform Apply
         env:
-          TF_VAR_cluster: ${{ format('{ name = "default", config_path = "{0}", host = "https://127.0.0.1:6443", hosts = [ "127.0.0.1.nip.io"] }', steps.k3s.otuputs.kubeconfig) }}
+          TF_VAR_cluster: ${{ format('{{ name = "default", config_path = "{0}", host = "https://127.0.0.1:6443", hosts = [ "127.0.0.1.nip.io"] }}', steps.k3s.otuputs.kubeconfig) }}
         working-directory: molecules/cluster-resources
         run: terraform apply -auto-approve
 
