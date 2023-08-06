@@ -65,7 +65,7 @@ variable "externals" {
     },
     {
       name = "loki",
-      repo = "https://grafana.github.io/loki/charts",
+      repo = "https://grafana.github.io/helm-charts",
       version = "2.1.1",
       namespace = "homelab"
     },

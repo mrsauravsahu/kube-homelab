@@ -928,7 +928,7 @@ backend:
 # Configuration for the single binary node(s)
 singleBinary:
   # -- Number of replicas for the single binary
-  replicas: 0
+  replicas: 1
   autoscaling:
     # -- Enable autoscaling, this is only used if `queryIndex.enabled: true`
     enabled: false
