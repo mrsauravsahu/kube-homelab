@@ -1,0 +1,20 @@
+flags:
+  rewrite: false
+
+service:
+  name: owncloud
+  port:
+    number: 80
+
+annotations:
+  hajimari.io/enable: "true"
+  hajimari.io/appName: "owncloud"
+
+ingress:
+  subdomain: owncloud
+  routePath: /
+
+hosts:
+%{ for host in hosts ~}
+- name: ${host}
+%{ endfor ~}
