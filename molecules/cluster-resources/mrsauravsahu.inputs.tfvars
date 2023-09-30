@@ -1,5 +1,5 @@
 cluster = {
-  name = "docker-desktop"
+  name = "default"
   config_path = "~/.kube/config"
   host = "https://127.0.0.1:6443"
   hosts = [
