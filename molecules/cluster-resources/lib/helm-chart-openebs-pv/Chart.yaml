@@ -1,6 +1,6 @@
 apiVersion: v2
-name: openebs-pvc
-description: PVC to use from OpenEBS
+name: openebs-pv
+description: PV to use from OpenEBS
 type: application
 version: 0.1.0
 appVersion: 0.1.0
