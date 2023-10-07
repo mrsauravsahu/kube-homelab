@@ -1,0 +1,126 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "owncloud.fullname" . }}
+  labels:
+    {{- include "owncloud.labels" . | nindent 4 }}
+spec:
+{{- if not .Values.autoscaling.enabled }}
+  replicas: {{ .Values.replicaCount }}
+{{- end }}
+  selector:
+    matchLabels:
+      {{- include "owncloud.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+    {{- with .Values.podAnnotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
+    {{- end }}
+      labels:
+        {{- include "owncloud.selectorLabels" . | nindent 8 }}
+    spec:
+      {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      serviceAccountName: {{ include "owncloud.serviceAccountName" . }}
+      securityContext:
+        {{- toYaml .Values.podSecurityContext | nindent 8 }}
+      containers:
+        - name: {{ .Chart.Name }}
+          securityContext:
+            {{- toYaml .Values.securityContext | nindent 12 }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          env:
+          - name: OWNCLOUD_TRUSTED_DOMAINS
+            value: {{ .Values.owncloud.trustedDomains | quote }}
+          - name: OWNCLOUD_DOMAIN
+            value: {{ .Values.owncloudDomain | quote }}
+          - name: OWNCLOUD_ADMIN_USERNAME
+            value: {{ .Values.owncloud.username | quote }}
+          - name: OWNCLOUD_ADMIN_PASSWORD
+            value: {{ .Values.owncloud.password | quote }}
+          {{- if .Values.mariadb.enabled }}
+          - name: MARIADB_HOST
+            value: {{ template "owncloud.mariadb.fullname" . }}
+          - name: MARIADB_PORT_NUMBER
+            value: "3306"
+          - name: OWNCLOUD_DATABASE_NAME
+            value: {{ .Values.mariadb.db.name | quote }}
+          - name: OWNCLOUD_DATABASE_USER
+            value: {{ .Values.mariadb.db.user | quote }}
+          - name: OWNCLOUD_DATABASE_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: {{ template "owncloud.mariadb.fullname" . }}
+                key: mariadb-password
+          {{- else }}
+          - name: OWNCLOUD_DB_TYPE
+            value: {{ .Values.externalDatabase.type | quote }}
+          - name: OWNCLOUD_DB_HOST
+            value: {{ .Values.externalDatabase.host | quote }}
+          - name: OWNCLOUD_DATABASE_PORT_NUMBER
+            value: {{ .Values.externalDatabase.port | quote }}
+          - name: OWNCLOUD_DB_NAME
+            value: {{ .Values.externalDatabase.name | quote }}
+          - name: OWNCLOUD_DB_USERNAME
+            value: {{ .Values.externalDatabase.user | quote }}
+          - name: OWNCLOUD_DB_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: {{ printf "%s-%s" .Release.Name "externaldb" }}
+                key: db-password
+          {{- end }}
+          {{- if .Values.redis.enabled }}
+          - name: OWNCLOUD_REDIS_ENABLED
+            value: true
+          - name: OWNCLOUD_REDIS_HOST
+            value: {{ .Values.redis.host | quote }}
+          {{- end }}
+          ports:
+            - name: http
+              containerPort: 8080
+              protocol: TCP
+          # livenessProbe:
+          #   httpGet:
+          #     path: /status.php
+          #     port: http
+          #     # httpHeaders:
+          #     # - name: Host
+          #     #   value: {{ .Values.owncloud.domain | quote }}
+          #   initialDelaySeconds: 120
+          #   timeoutSeconds: 5
+          #   failureThreshold: 6
+          # readinessProbe:
+          #   httpGet:
+          #     path: /status.php
+          #     port: http
+          #     # httpHeaders:
+          #     # - name: Host
+          #     #   value: {{ .Values.owncloud.domain | quote }}
+          #   initialDelaySeconds: 30
+          #   timeoutSeconds: 3
+          #   periodSeconds: 5
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
+          volumeMounts:
+          - name: owncloud-data
+            mountPath: /mnt/data
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      volumes:
+        - name: owncloud-data
+          persistentVolumeClaim:
+            claimName: {{ .Values.persistence.claimName }}
