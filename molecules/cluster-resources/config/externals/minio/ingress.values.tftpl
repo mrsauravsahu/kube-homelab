@@ -1,0 +1,16 @@
+flags:
+  rewrite: true
+
+service:
+  name: minio-console
+  port:
+    number: 9001
+  
+ingress:
+  subdomain: minio
+  routePath: /
+
+hosts:
+%{ for host in hosts ~}
+- name: ${host}
+%{ endfor ~}
