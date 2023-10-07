@@ -21,7 +21,7 @@ persistence:
   enabled: true
   claimName: owncloud-pvc
   storageClassName: openebs-hostpath
-  volumeName: homelab-data-pv
+  volumeName: homelab-pv-files
 
 redis:
   enabled: false
