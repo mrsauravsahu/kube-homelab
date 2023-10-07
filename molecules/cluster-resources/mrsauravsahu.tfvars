@@ -106,6 +106,12 @@ externals = [
     version = "2.11.0",
     namespace = "homelab"
   },
+  {
+    name = "mongodb",
+    repo = "https://openebs.github.io/charts",
+    version = "14.0.5",
+    namespace = "homelab"
+  },
   # {
   #   name = "owncloud",
   #   repo = "https://owncloud-docker.github.io/helm-charts",
