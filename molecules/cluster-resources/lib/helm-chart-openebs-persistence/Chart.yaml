@@ -1,0 +1,6 @@
+apiVersion: v2
+name: openebs-persistence
+description: PV and PVC to use from OpenEBS
+type: application
+version: 0.1.0
+appVersion: 0.1.0
