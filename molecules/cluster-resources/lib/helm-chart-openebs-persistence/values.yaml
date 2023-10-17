@@ -1,0 +1,13 @@
+storage:
+volume:
+pv:
+    access:
+    enabled:
+    name:
+    node:
+    path:
+    storage:
+pvc:
+    enabled:
+    name:
+    storage:
