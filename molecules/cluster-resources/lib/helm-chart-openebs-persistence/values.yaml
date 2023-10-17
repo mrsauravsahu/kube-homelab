@@ -1,13 +1,11 @@
-storage:
-volume:
 pv:
-    access:
-    enabled:
-    name:
-    node:
-    path:
-    storage:
+  enabled: ""
+  name: ""
+  accessModes: []
+  path: ""
+  nodeAffinity: {}
 pvc:
-    enabled:
-    name:
-    storage:
+  enabled: ""
+  name: ""
+storageClassName: ""
+storage: ""
