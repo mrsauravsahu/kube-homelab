@@ -12,7 +12,7 @@ hajimari:
   showGreeting: true
   showApps: true
   showAppGroups: true
-  showAppUrls: true
+  showAppUrls: false
   showAppInfo: true
   showAppStatus: true
   defaultAppIcon: mdi:application
@@ -56,15 +56,19 @@ hajimari:
       searchUrl: hhttps://open.spotify.com/search/{query}
       url: https://open.spotify.com
   globalBookmarks:
-    - group: "Applications"
-      bookmarks:
-        - name: "CODE"
-          url: "http://pi/code/"
-        - name: "PAYOBILLS"
-          url: "http://pi/payobills/"
     - group: "Websites"
       bookmarks:
         - name: "GITHUB"
           url: "https://github.com"
+        - name: "YOUTUBE"
+          url: "https://youtube.com"
         - name: "NETFLIX"
           url: "https://netflix.com"
+    - group: "Homelab"
+      bookmarks:
+        - name: "PIHOLE"
+          url: "http://pihole.192.168.0.100.nip.io/admin/"
+        - name: "CODE"
+          url: "http://pi/code/"
+        - name: "PAYOBILLS"
+          url: "http://pi/payobills/"

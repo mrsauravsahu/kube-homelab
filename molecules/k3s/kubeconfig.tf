@@ -1,5 +1,5 @@
 data "remote_file" "kubeconfig" {
-  for_each = local.servers
+  for_each = resource.ssh_resource.install_k3s
   conn {
     host        = each.value.host
     user        = each.value.user
