@@ -112,12 +112,12 @@ externals = [
     version = "14.0.5",
     namespace = "homelab"
   },
-  {
-    name = "couchdb",
-    repo = "https://apache.github.io/couchdb-helm",
-    version = "4.4.4",
-    namespace = "homelab"
-  },
+  # {
+  #   name = "couchdb",
+  #   repo = "https://apache.github.io/couchdb-helm",
+  #   version = "4.4.4",
+  #   namespace = "homelab"
+  # },
   # {
   #   name = "owncloud",
   #   repo = "https://owncloud-docker.github.io/helm-charts",
