@@ -1,0 +1,16 @@
+flags:
+  rewrite: true
+
+service:
+  name: keycloak
+  port:
+    number: 8080
+  
+ingress:
+  subdomain: keycloak
+  routePath: /
+
+hosts:
+%{ for host in hosts ~}
+- name: ${host}
+%{ endfor ~}
