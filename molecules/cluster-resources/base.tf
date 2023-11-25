@@ -1,4 +1,4 @@
-resource "kubernetes_namespace" "homelab_ns" {
+resource "kubernetes_namespace" "homelab" {
   metadata {
     annotations = {
       name = var.base.name
@@ -12,4 +12,9 @@ resource "kubernetes_namespace" "homelab_ns" {
   }
 
   provider = k8s
+}
+
+moved {
+  from = kubernetes_namespace.homelab_ns
+  to = kubernetes_namespace.homelab
 }
