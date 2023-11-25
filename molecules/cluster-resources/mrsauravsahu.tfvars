@@ -1,8 +1,9 @@
 cluster = {
   name = "default"
-  config_path = "../../config/192.168.0.100.kubeconfig"
-  host = "https://127.0.0.1:6443"
+  config_path = "../../config/pi.dory-char.ts.net.kubeconfig"
+  host = "https://pi.dory-char.ts.net:6443"
   hosts = [
+    "pi.dory-char.ts.net",
     "192.168.0.100.nip.io",
     "pi.lol",
     "pi.local"
