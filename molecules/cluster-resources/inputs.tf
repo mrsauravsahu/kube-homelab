@@ -8,6 +8,14 @@ variable "base" {
   }
 }
 
+variable "per_environment_configuration" {
+  description = "Per environment configuration like what apps to install into the environment. All apps are present in production by default"
+  type = list(object({
+    name = string
+    applications = list(string)
+  }))
+}
+
 variable "cluster" {
   description = "Details about the cluster"
   type = object({
