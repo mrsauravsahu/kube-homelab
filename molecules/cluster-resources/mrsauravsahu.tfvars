@@ -9,6 +9,19 @@ cluster = {
   ]
 }
 
+per_environment_configuration = [
+  {
+    name = "playground"
+    applications = [
+      "mongodb"
+    ]
+  },
+  {
+    name = "production"
+    applications = []
+  }
+]
+
 externals = [
     {
       name = "ingress-nginx"
@@ -46,12 +59,12 @@ externals = [
       version = "2.11.0",
       namespace = "homelab"
     },
-    # {
-    #   name = "keycloak",
-    #   repo = "https://codecentric.github.io/helm-charts",
-    #   version = "20.0.3",
-    #   namespace = "homelab"
-    # },
+    {
+      name = "keycloak",
+      repo = "https://codecentric.github.io/helm-charts",
+      version = "20.0.3",
+      namespace = "homelab"
+    },
     #{
     # name = "prometheus",
     # repo = "https://prometheus-community.github.io/helm-charts",
