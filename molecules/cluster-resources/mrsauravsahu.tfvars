@@ -35,12 +35,12 @@ externals = [
      version = "1.2.0"
      namespace = "homelab"
     },
-    {
-     name = "postgresql"
-     repo = "https://charts.bitnami.com/bitnami"
-     version = "13.1.0"
-     namespace = "homelab"
-    },
+    # {
+    #  name = "postgresql"
+    #  repo = "https://charts.bitnami.com/bitnami"
+    #  version = "13.1.0"
+    #  namespace = "homelab"
+    # },
     // TODO: nextcloud fails due to slow startup, need to figure this out
     #  {
     #    name = "nextcloud"
@@ -126,6 +126,12 @@ externals = [
     version = "14.0.5",
     namespace = "homelab"
   },
+  # {
+  #   name = "mongodb",
+  #   repo = "https://charts.bitnami.com/bitnami",
+  #   version = "14.0.5",
+  #   namespace = "homelab"
+  # },
   # {
   #   name = "couchdb",
   #   repo = "https://apache.github.io/couchdb-helm",

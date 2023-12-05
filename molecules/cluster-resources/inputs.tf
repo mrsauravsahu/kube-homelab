@@ -30,6 +30,7 @@ variable "externals" {
   description = "Details about external apps to install"
   type = list(object({
     name = string
+    chart_name = optional(string)
     repo = string
     version = string
     namespace = optional(string)
