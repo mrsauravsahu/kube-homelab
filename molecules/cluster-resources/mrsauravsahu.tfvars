@@ -12,7 +12,7 @@ cluster = {
 
 per_environment_configuration = [
   {
-    name = "playground"
+    name = "sbx"
     applications = [
       "mongodb"
     ]

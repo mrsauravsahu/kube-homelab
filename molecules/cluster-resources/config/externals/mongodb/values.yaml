@@ -1367,7 +1367,7 @@ arbiter:
   ## @param arbiter.enabled Enable deploying the arbiter
   ##   https://docs.mongodb.com/manual/tutorial/add-replica-set-arbiter/
   ##
-  enabled: false
+  enabled: true
   ## @param arbiter.hostAliases Add deployment host aliases
   ## https://kubernetes.io/docs/concepts/services-networking/add-entries-to-pod-etc-hosts-with-host-aliases/
   ##

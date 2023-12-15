@@ -20,3 +20,12 @@ resource "helm_release" "external_ingresses" {
     helm_release.external_apps
   ]
 }
+
+resource "helm_release" "mongo-sbx" {
+  repository = "https://charts.bitnami.com/bitnami"
+  name       = "mongodb"
+  chart      = "mongodb"
+  namespace  = "homelab-sbx"
+  create_namespace = true
+  values = fileexists("./config/externals/mongodb/values.yaml") == true ? ["${file("./config/externals/mongodb/values.yaml")}"] : []
+}
