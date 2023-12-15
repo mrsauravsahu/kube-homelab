@@ -1,8 +1,9 @@
 cluster = {
   name = "default"
-  config_path = "../../config/192.168.0.100.kubeconfig"
+  config_path = "../../config/pi.dory-char.ts.net.kubeconfig"
   host = "https://127.0.0.1:6443"
   hosts = [
+    "pi.dory-char.ts.net",
     "192.168.0.100.nip.io",
     "pi.lol",
     "pi.local"
@@ -131,6 +132,12 @@ externals = [
   #   version = "4.4.4",
   #   namespace = "homelab"
   # },
+  {
+    name = "minio",
+    repo = "https://charts.min.io/",
+    version = "5.0.14",
+    namespace = "homelab"
+  },
   # {
   #   name = "owncloud",
   #   repo = "https://owncloud-docker.github.io/helm-charts",
