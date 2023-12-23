@@ -1,6 +1,6 @@
 cluster = {
   name = "default"
-  config_path = "../../config/pi.dory-char.ts.net.kubeconfig"
+  config_path = "../../config/192.168.0.100.kubeconfig"
   host = "https://127.0.0.1:6443"
   hosts = [
     "pi.dory-char.ts.net",
@@ -12,7 +12,7 @@ cluster = {
 
 per_environment_configuration = [
   {
-    name = "playground"
+    name = "sbx"
     applications = [
       "mongodb"
     ]
@@ -29,16 +29,22 @@ externals = [
       repo = "https://kubernetes.github.io/ingress-nginx"
       version = "4.4.0"
     },
+    # {
+    #  name = "hajimari"
+    #  repo = "https://hajimari.io"
+    #  version = "1.2.0"
+    #  namespace = "homelab"
+    # },
+    # {
+    #  name = "postgresql"
+    #  repo = "https://charts.bitnami.com/bitnami"
+    #  version = "13.1.0"
+    #  namespace = "homelab"
+    # },
     {
-     name = "hajimari"
-     repo = "https://hajimari.io"
-     version = "1.2.0"
-     namespace = "homelab"
-    },
-    {
-     name = "postgresql"
+     name = "rabbitmq"
      repo = "https://charts.bitnami.com/bitnami"
-     version = "13.1.0"
+     version = "12.6.1"
      namespace = "homelab"
     },
     // TODO: nextcloud fails due to slow startup, need to figure this out
