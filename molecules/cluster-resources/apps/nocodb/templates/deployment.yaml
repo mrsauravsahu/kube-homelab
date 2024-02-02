@@ -73,5 +73,5 @@ spec:
       volumes:
         - name: {{ include "nocodb.fullname" . }}
           persistentVolumeClaim:
-            claimName: {{ include "nocodb.fullname" . }}
+            claimName: {{ .Values.storage.pvcName }}
       {{- end }}
