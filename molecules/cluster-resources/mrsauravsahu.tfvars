@@ -35,12 +35,12 @@ externals = [
     #  version = "1.2.0"
     #  namespace = "homelab"
     # },
-    # {
-    #  name = "postgresql"
-    #  repo = "https://charts.bitnami.com/bitnami"
-    #  version = "13.1.0"
-    #  namespace = "homelab"
-    # },
+    {
+     name = "postgresql"
+     repo = "https://charts.bitnami.com/bitnami"
+     version = "13.4.4"
+     namespace = "homelab"
+    },
     {
      name = "rabbitmq"
      repo = "https://charts.bitnami.com/bitnami"
