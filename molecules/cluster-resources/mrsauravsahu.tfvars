@@ -1,12 +1,9 @@
 cluster = {
   name = "default"
-  config_path = "../../config/192.168.0.100.kubeconfig"
-  host = "https://127.0.0.1:6443"
+  config_path = "../../config/<todo-add-domain>.kubeconfig"
+  host = "https://<todo-add-domain>:6443"
   hosts = [
-    "pi.dory-char.ts.net",
-    "192.168.0.100.nip.io",
-    "pi.lol",
-    "pi.local"
+    "<todo-add-domain>",
   ]
 }
 
@@ -29,16 +26,16 @@ externals = [
       repo = "https://kubernetes.github.io/ingress-nginx"
       version = "4.4.0"
     },
-    # {
-    #  name = "hajimari"
-    #  repo = "https://hajimari.io"
-    #  version = "1.2.0"
-    #  namespace = "homelab"
-    # },
+    {
+     name = "hajimari"
+     repo = "https://hajimari.io"
+     version = "1.2.0"
+     namespace = "homelab"
+    },
     {
      name = "postgresql"
      repo = "https://charts.bitnami.com/bitnami"
-     version = "13.4.4"
+     version = "13.1.0"
      namespace = "homelab"
     },
     {
