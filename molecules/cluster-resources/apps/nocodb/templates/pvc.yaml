@@ -2,7 +2,7 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: {{ include "nocodb.fullname" . }}
+  name: {{ .Values.storage.pvcName }}
   labels:
     {{- include "nocodb.selectorLabels" . | nindent 8 }}
 spec:
