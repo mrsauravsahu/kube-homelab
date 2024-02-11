@@ -92,7 +92,7 @@ storage:
   enabled: true
   size: 3Gi
   storageClassName: "openebs-hostpath"
-  pvcName: "nocodb"
+  pvcName: "pvc-homelab-app-data-nocodb"
 
 postgresql:
   enabled: false
