@@ -252,7 +252,15 @@ topologySpreadConstraints: []
 #   whenUnsatisfiable: <string>
 #   labelSelector: <object>
 
-affinity: {}
+affinity:
+  nodeAffinity:
+    requiredDuringSchedulingIgnoredDuringExecution:
+      nodeSelectorTerms:
+      - matchExpressions:
+        - key: kubernetes.io/hostname
+          operator: In
+          values:
+          - pi
 
 # -- Administrator password when not using an existing secret (see below)
 adminPassword: "admin"
