@@ -3,10 +3,13 @@ locals {
     for environment in var.per_environment_configuration:
     environment.name => environment.name == "production" ? var.base.name : format("%s-%s", var.base.name, environment.name)
   }
+  extra_namespaces = {
+    for ns in var.namespaces: ns.name => ns.name
+  }
 }
 
 resource "kubernetes_namespace" "homelab" {
-  for_each = local.namespaces_to_create
+  for_each = merge(local.extra_namespaces, local.namespaces_to_create)
   metadata {
     annotations = {
       name = each.value

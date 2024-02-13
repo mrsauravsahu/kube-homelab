@@ -7,6 +7,10 @@ cluster = {
   ]
 }
 
+namespaces = [
+  { name = "argocd" }
+]
+
 per_environment_configuration = [
   {
     name = "sbx"
@@ -141,6 +145,12 @@ externals = [
     version = "5.0.14",
     namespace = "homelab"
   },
+  {
+    name = "argo-cd",
+    repo = "https://argoproj.github.io/argo-helm",
+    version = "6.0.6",
+    namespace = "argocd"
+  }
   # {
   #   name = "owncloud",
   #   repo = "https://owncloud-docker.github.io/helm-charts",
