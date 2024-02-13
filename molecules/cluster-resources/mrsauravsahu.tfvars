@@ -7,6 +7,10 @@ cluster = {
   ]
 }
 
+namespaces = [
+  { name = "argocd" }
+]
+
 per_environment_configuration = [
   {
     name = "sbx"
