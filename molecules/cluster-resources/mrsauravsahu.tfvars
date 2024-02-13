@@ -150,7 +150,6 @@ externals = [
     repo = "https://argoproj.github.io/argo-helm",
     version = "6.0.6",
     namespace = "argocd"
-    
   }
   # {
   #   name = "owncloud",
