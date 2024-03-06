@@ -1,0 +1,11 @@
+pv:
+  enabled: ""
+  name: ""
+  accessModes: []
+  path: ""
+  nodeAffinity: {}
+pvc:
+  enabled: ""
+  name: ""
+storageClassName: ""
+storage: ""

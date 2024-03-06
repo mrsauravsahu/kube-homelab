@@ -2,16 +2,16 @@ flags:
   rewrite: false
 
 service:
-  name: pihole-web
+  name: owncloud
   port:
     number: 80
 
 annotations:
   hajimari.io/enable: "true"
-  hajimari.io/appName: "pihole"
+  hajimari.io/appName: "owncloud"
 
 ingress:
-  subdomain: dns
+  subdomain: owncloud
   routePath: /
 
 hosts:

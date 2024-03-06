@@ -1,0 +1,20 @@
+{{- if .Values.pv.enabled -}}
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: {{ .Values.pv.name }}
+spec:
+  storageClassName: {{ .Values.storageClassName }}
+  capacity:
+      storage: {{ .Values.storage }}
+  accessModes:
+    {{- range .Values.pv.accessModes }}
+      - {{ . }}
+    {{- end }}
+  local:
+    fsType: ""
+    path: {{ .Values.pv.path }}
+  persistentVolumeReclaimPolicy: Retain
+  nodeAffinity:
+    {{- toYaml .Values.pv.nodeAffinity | nindent 4 }}
+{{- end -}}

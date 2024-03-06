@@ -1,4 +1,64 @@
 image:
-  tag: 25.0.2-apache
-externalDatabase:
-  host: postgresql1.playground.svc.cluster.local:5432
+  repository: nextcloud
+
+nextcloud:
+  apache:
+    ServerName: nextcloud.192.168.0.100.nip.io
+  # host: "192.168.0.100"
+  # ingress:
+  #     enabled: True
+  #     hosts:
+  #       - nextcloud.192.168.0.100.nip.io
+  #       # - nextcloud.pi.local
+  #     annotations:
+  #       kubernetes.io/ingress.class: nginx
+  # phpClientHttpsFix:
+  #   enabled: true
+  #   protocol: "https" 
+  configs:
+    domains.config.php: |-
+      <?php
+      $CONFIG = array (
+        'trusted_domains' =>
+          array (
+            1 => 'nextcloud.192.168.0.100.nip.io',k
+            2 => '${KUBE_PROXY_SERVICE_HOST}:${KUBE_PROXY_SERVICE_PORT}',
+          )
+      );
+  #  2 => 'nextcloud.pi.lol',
+  #  3 => 'nextcloud.pi.local',
+  #  0 => '192.168.0.100',
+
+  # config:
+  #   trusted_domains:
+  #     - nextcloud.192.168.0.100.nip.io
+  #     # - 192.168.0.100
+  #     # - nextcloud.pi.lol
+  #     # - nextcloud.pi.local
+  persistence:
+    enabled: true
+    storageClass: openebs-hostpath
+    accessMode: ReadWriteOnce
+    size: 10Gi  # Adjust the size as needed
+  
+  livenessProbe:
+    enabled: true
+    initialDelaySeconds: 10
+    periodSeconds: 10
+    timeoutSeconds: 5
+    failureThreshold: 3
+    successThreshold: 1
+  readinessProbe:
+    enabled: true
+    initialDelaySeconds: 10
+    periodSeconds: 10
+    timeoutSeconds: 5
+    failureThreshold: 3
+    successThreshold: 1
+  startupProbe:
+    enabled: false
+    initialDelaySeconds: 30
+    periodSeconds: 10
+    timeoutSeconds: 5
+    failureThreshold: 30
+    successThreshold: 1

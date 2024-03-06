@@ -2,16 +2,16 @@ flags:
   rewrite: false
 
 service:
-  name: pihole-web
+  name: minio-console
   port:
-    number: 80
+    number: 9001
 
 annotations:
   hajimari.io/enable: "true"
-  hajimari.io/appName: "pihole"
+  hajimari.io/appName: "minio"
 
 ingress:
-  subdomain: dns
+  subdomain: minio
   routePath: /
 
 hosts:

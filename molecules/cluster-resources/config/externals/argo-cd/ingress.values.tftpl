@@ -2,16 +2,16 @@ flags:
   rewrite: false
 
 service:
-  name: pihole-web
+  name: argo-cd-argocd-server
   port:
-    number: 80
+    number: 443
 
 annotations:
   hajimari.io/enable: "true"
-  hajimari.io/appName: "pihole"
+  hajimari.io/appName: "argocd"
 
 ingress:
-  subdomain: dns
+  subdomain: argo
   routePath: /
 
 hosts:

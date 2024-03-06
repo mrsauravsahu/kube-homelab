@@ -2,16 +2,16 @@ flags:
   rewrite: false
 
 service:
-  name: pihole-web
+  name: nocodb
   port:
-    number: 80
+    number: 8080
 
 annotations:
   hajimari.io/enable: "true"
-  hajimari.io/appName: "pihole"
+  hajimari.io/appName: "nocodb"
 
 ingress:
-  subdomain: dns
+  subdomain: nocodb
   routePath: /
 
 hosts:
