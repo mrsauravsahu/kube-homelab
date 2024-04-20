@@ -98,7 +98,7 @@ image:
   #   - myRegistrKeySecretName
 
 testFramework:
-  enabled: true
+  enabled: false
   image: "bats/bats"
   tag: "v1.4.1"
   imagePullPolicy: IfNotPresent
@@ -255,7 +255,8 @@ resources: {}
 ## Node labels for pod assignment
 ## ref: https://kubernetes.io/docs/user-guide/node-selection/
 #
-nodeSelector: {}
+nodeSelector:
+  kubernetes.io/hostname: pi
 
 ## Tolerations for pod assignment
 ## ref: https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/
@@ -525,7 +526,7 @@ datasources:
       isDefault: true
     - name: loki
       type: loki
-      url: "http://loki:3100"
+      url: "http://loki-stack:3100"
       access: proxy
 
 #  datasources.yaml:
@@ -1103,7 +1104,8 @@ imageRenderer:
   ## Node labels for pod assignment
   ## ref: https://kubernetes.io/docs/user-guide/node-selection/
   #
-  nodeSelector: {}
+  nodeSelector:
+    kubernetes.io/hostname: pi
 
   ## Tolerations for pod assignment
   ## ref: https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/

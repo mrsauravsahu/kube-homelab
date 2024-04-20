@@ -1,4 +1,9 @@
+# https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/exporter/lokiexporter/README.md
+
 mode: "deployment"
+
+image:
+  repository: "otel/opentelemetry-collector-contrib"
 
 config:
   receivers:
@@ -13,10 +18,13 @@ config:
       loglevel: debug
 
     loki:
-      endpoint: "http://loki.homelab.svc.cluster.local:3100/loki/api/v1/push"
-      labels:
-        attributes:
-          log.file.name: "filename"
+      endpoint: "http://loki-stack.homelab.svc.cluster.local:3100/loki/api/v1/push"
+      default_labels_enabled:
+        exporter: false
+        job: true
+      # labels:
+      #   attributes:
+      #     log.file.name: "filename"
 
   service:
     pipelines:
