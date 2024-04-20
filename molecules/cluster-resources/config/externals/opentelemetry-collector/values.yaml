@@ -11,7 +11,14 @@ config:
       include: [/var/log/*.log]
 
   processors:
-    batch: {}
+    attributes:
+      actions:
+        - action: insert
+          key: log_file_name
+          from_attribute: log.file.name
+        - action: insert
+          key: loki.attribute.labels
+          value: log_file_name
 
   exporters:
     logging:
@@ -22,13 +29,10 @@ config:
       default_labels_enabled:
         exporter: false
         job: true
-      # labels:
-      #   attributes:
-      #     log.file.name: "filename"
 
   service:
     pipelines:
       logs:
         receivers: [filelog]
-        processors: [batch]
+        processors: [attributes]
         exporters: [loki]
