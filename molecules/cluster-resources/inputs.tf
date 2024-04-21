@@ -8,6 +8,14 @@ variable "base" {
   }
 }
 
+variable "namespaces" {
+  description = "Extra namespaces to be created - these will be created before all other resources in this molecule"
+  type = list(object({
+    name = string
+  }))
+  default = []
+}
+
 variable "per_environment_configuration" {
   description = "Per environment configuration like what apps to install into the environment. All apps are present in production by default"
   type = list(object({
