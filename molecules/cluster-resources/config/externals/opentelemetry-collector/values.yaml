@@ -2,6 +2,8 @@
 
 mode: "deployment"
 
+replicaCount: 0
+
 image:
   repository: "otel/opentelemetry-collector-contrib"
 
@@ -32,6 +34,7 @@ config:
 
   service:
     pipelines:
+      metrics: null
       logs:
         receivers: [filelog]
         processors: [attributes]
