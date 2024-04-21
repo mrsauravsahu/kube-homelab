@@ -17,6 +17,8 @@ commonLabels: {}
 
 controller:
   name: controller
+  nodeSelector:
+    kubernetes.io/hostname: pi
   enableAnnotationValidations: false
   image:
     ## Keep false as default for now!
