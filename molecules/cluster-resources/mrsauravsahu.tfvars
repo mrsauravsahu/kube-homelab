@@ -24,6 +24,17 @@ per_environment_configuration = [
   }
 ]
 
+ingresses = [
+  {
+    name = "payobills"
+    namespace = "payobills"
+  },
+  {
+    name = "payobills-graphql"
+    namespace = "payobills"
+  }
+]
+
 externals = [
     {
       name = "ingress-nginx"
