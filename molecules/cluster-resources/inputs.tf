@@ -34,6 +34,15 @@ variable "cluster" {
   })
 }
 
+variable "ingresses" {
+  description = "Details about extra ingresses to create to expose internal apps"
+  type = list(object({
+    name = string
+    namespace = optional(string)
+  }))
+  default = []
+}
+
 variable "externals" {
   description = "Details about external apps to install"
   type = list(object({

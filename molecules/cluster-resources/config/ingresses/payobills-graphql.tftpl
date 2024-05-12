@@ -1,0 +1,16 @@
+flags:
+  rewrite: false
+
+service:
+  name: bills
+  port:
+    number: 80
+
+ingress:
+  subdomain: payobills
+  routePath: /graphql
+
+hosts:
+%{ for host in hosts ~}
+- name: ${host}
+%{ endfor ~}
