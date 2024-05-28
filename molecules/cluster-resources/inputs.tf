@@ -24,6 +24,16 @@ variable "per_environment_configuration" {
   }))
 }
 
+variable "databases" {
+    description = "Details about the db clusters to create using cnpg.io"
+    type = list(object({
+      type = string
+      repo = optional(string)
+      namespace = string
+      name = string
+    }))
+  }
+
 variable "cluster" {
   description = "Details about the cluster"
   type = object({

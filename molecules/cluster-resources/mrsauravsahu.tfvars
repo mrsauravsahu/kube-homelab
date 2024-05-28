@@ -35,6 +35,14 @@ ingresses = [
   }
 ]
 
+databases = [
+  {
+    type = "postgresql",
+    namespace = "homelab",
+    name = "keycloak-db"
+  }
+]
+
 externals = [
     {
       name = "ingress-nginx"
