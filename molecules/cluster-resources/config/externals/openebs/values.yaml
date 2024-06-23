@@ -44,7 +44,7 @@ persistentStoragePath:
   baseDir: "/var/openebs"
 
 provisioner:
-  enabled: true
+  enabled: false
   image: "quay.io/openebs/openebs-k8s-provisioner"
   imageTag: "2.12.2"
   replicas: 1
@@ -60,8 +60,10 @@ localprovisioner:
   image: "quay.io/openebs/provisioner-localpv"
   imageTag: "3.4.0"
   replicas: 1
+  upgradeStrategy: "Recreate"
   basePath: "/homelab/drives/drive-2tb-1"
-  nodeSelector: {}
+  nodeSelector:
+    kubernetes.io/hostname: pi
   tolerations: []
   affinity: {}
   healthCheck:
