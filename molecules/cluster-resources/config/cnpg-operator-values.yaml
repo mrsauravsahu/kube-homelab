@@ -136,7 +136,8 @@ resources: {}
   #   memory: 100Mi
 
 # -- Nodeselector for the operator to be installed.
-nodeSelector: {}
+nodeSelector:
+  kubernetes.io/hostname: pi
 
 # -- Tolerations for the operator to be installed.
 tolerations: []
