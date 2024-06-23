@@ -6,6 +6,9 @@ resource "helm_release" "cnpg_operator" {
   chart      = "cloudnative-pg"
   namespace  = "cnpg-system"
   create_namespace = true
+  
+  values = ["${file("./config/cnpg-operator-values.yaml")}"]
+
   timeout = 600
 }
 
