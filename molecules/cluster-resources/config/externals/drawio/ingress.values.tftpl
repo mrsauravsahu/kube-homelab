@@ -1,0 +1,20 @@
+flags:
+  rewrite: false
+
+service:
+  name: drawio
+  port:
+    number: 10214
+
+annotations:
+  hajimari.io/enable: "true"
+  hajimari.io/appName: "Draw IO"
+
+ingress:
+  subdomain: drawio
+  routePath: /
+
+hosts:
+%{ for host in hosts ~}
+- name: ${host}
+%{ endfor ~}
