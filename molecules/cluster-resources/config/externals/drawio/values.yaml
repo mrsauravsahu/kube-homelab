@@ -1,0 +1,41 @@
+image:
+  repository: jgraph/drawio
+  tag: 24.6.2@sha256:535f762e49551b2f32d540d8376be1e9422fc9d71eaeebf6012f60f88ae136f6
+  pullPolicy: IfNotPresent
+
+securityContext:
+  container:
+    readOnlyRootFilesystem: false
+    runAsNonRoot: false
+    runAsUser: 0
+    runAsGroup: 0
+
+service:
+  main:
+    ports:
+      main:
+        port: 10214
+        targetPort: 8080
+
+workload:
+  main:
+    podSpec:
+      containers:
+        main:
+          probes:
+            liveness:
+              type: http
+              path: /
+            readiness:
+              type: http
+              path: /
+            startup:
+              type: http
+              path: /
+          env: {}
+      nodeSelector:
+        kubernetes.io/hostname: pi
+
+portal:
+  open:
+    enabled: true
