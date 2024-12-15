@@ -62,6 +62,12 @@ externals = [
      namespace = "homelab"
     },
     {
+      name = "redis"
+      repo = "oci://registry-1.docker.io/bitnamicharts"
+      version = "20.2.1"
+      namespace = "homelab"
+    },
+    {
      name = "rabbitmq"
      repo = "https://charts.bitnami.com/bitnami"
      version = "12.6.1"
