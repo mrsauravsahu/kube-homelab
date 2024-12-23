@@ -1,36 +1,48 @@
-# homelab
+# kube-homelab
 
 A Kubernetes based setup to run a home server.
 
-## getting started
+## Getting started
+
+
+
+## Architecture
+
+The architecture is evolving as this is an active project I'm working on, but her's the basic idea. 
+
+The approach is layered and layers depend on one or more installed components from the layer below.
+
+![Architecure Diagram](./docs/images/kube-homelab.drawio.svg)
+
+# Learn more
 
 I had also created a video where I show how I set the homelab up for my use. 
 
 [<img src="https://user-images.githubusercontent.com/9134050/212525414-02a03a7e-f1f6-4b51-a5a6-c4a49c994f89.png">](https://www.youtube.com/watch?v=LfBcERF6qw4)
 
-### requirements
+### Requirements
 
 - Linux nodes (a VM, Raspberry PI, Tower PC)
 - Docker installed on the node
 - systemd configured on the nodes (this is because k3s runs as a systemd service)
 - ssh configured with a keypair - password based authentication is not supported
 
-### terminology
+### Terminology
 
 - Any reusable part of this project will be an atom.
 - Various parts of the setup are put into different terraform modules to be used as a workspace, each. This is also called a molecule.
 
-### software to run the terraform molecules
+### Software to run the terraform molecules
 
 - terraform installed on the agent which will execute terraform (can be the node itself as well) - currently `required_version = ">=1.3.0"`
 - [terraform-backend-git](https://github.com/plumber-cd/terraform-backend-git) if you want to use a git repository to store terraform state. 
 
-### order of molecules
+### Order of molecules
 
 1. [k3s](./molecules/k3s/readme.md)
 2. [cluster-resources](./molecules/cluster-resources/readme.md)
 
-### running the molecules
+### Running the molecules
 
 #### Only if you are using a remote backend
 - Fill `.envrc` with all the required values. Place one .envrc in each molecule, this will help segregate their values and also because each molecule should have its own state file, so `export TF_BACKEND_GIT_GIT_STATE=` will change. I use `state-<MOLECULE_NAME>.json` as the pattern
@@ -43,42 +55,10 @@ I had also created a video where I show how I set the homelab up for my use.
 
 Read any specific requirements per molecule in their readme.
 
-### test bed
+### Test bed
 
-I'm using my Raspberry Pi 4 as my home server and all testing is done on it. 
+I'm using Raspberry Pi 4 and Raspberry Pi 5 as the nodes on my Kubernetes cluster and all testing is done on this setup.
 
-- Raspberry Pi 4
+- Raspberry Pi 4 +  Raspberry Pi 5
 - Ubuntu Server 22.04
 - docker 20.10.12
-
-## apps
-
-### jellyfin
-
-Jellyfin is a media server. Play all your local video content.
-
-### pihole (looking at other alternatives too)
-
-Local DNS
-
-### nextcloud
-
-File Sharing
-
-## setting up your machine
-
-You can either use [k3d](https://k3d.io/) to try out locally, or like I am, using a server.
-I have k3s installed on my Raspberry Pi 4.
-
-### k3s setup
-
-Run the following to setup the cluster.
-
-```bash
-$ curl -sfL https://get.k3s.io | INSTALL_K3S_VERSION='v1.21.14+k3s1' sh -
-```
-
-Now you can run `terraform -chdir=iac plan` to check what's getting installed.
-
-Finally, run `terraform -chdir=iac apply --auto-approve` to install everything.
-
