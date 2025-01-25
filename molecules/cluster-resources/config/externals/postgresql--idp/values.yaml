@@ -115,28 +115,37 @@ image:
   pullSecrets: []
   ## Set to true if you would like to see extra information on logs
   ##
-  debug: false
+  debug: true
 ## Authentication parameters
 ## ref: https://github.com/bitnami/containers/tree/main/bitnami/postgresql#setting-the-root-password-on-first-run
 ## ref: https://github.com/bitnami/containers/tree/main/bitnami/postgresql#creating-a-database-on-first-run
 ## ref: https://github.com/bitnami/containers/tree/main/bitnami/postgresql#creating-a-database-user-on-first-run
 ##
+
+passwordUpdateJob:
+  enabled: true
+
 auth:
   ## @param auth.enablePostgresUser Assign a password to the "postgres" admin user. Otherwise, remote access will be blocked for this user
   ##
   enablePostgresUser: true
   ## @param auth.postgresPassword Password for the "postgres" admin user. Ignored if `auth.existingSecret` is provided
   ##
-  postgresPassword: ""
+  postgresPassword: "aDpz0PlLCd1"
+  username: "app"
+  password: "x2aHwyqzgz1"
+  database: "app"
+  existingSecret: ""
+  # postgresPassword: ""
   ## @param auth.username Name for a custom user to create
   ##
-  username: ""
+  # username: ""
   ## @param auth.password Password for the custom user to create. Ignored if `auth.existingSecret` is provided
   ##
-  password: ""
+  # password: ""
   ## @param auth.database Name for a custom database to create
   ##
-  database: ""
+  # database: ""
   ## @param auth.replicationUsername Name of the replication user
   ##
   replicationUsername: repl_user
@@ -659,7 +668,7 @@ primary:
     enabled: true
     ## @param primary.persistence.existingClaim Name of an existing PVC to use
     ##
-    existingClaim: "pvc-homelab-app-data-postgresql"
+    existingClaim: "pvc-homelab-app-data-postgresql--idp"
     ## @param primary.persistence.mountPath The path the volume will be mounted at
     ## Note: useful when using custom PostgreSQL images
     ##
