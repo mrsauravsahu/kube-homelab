@@ -1,8 +1,13 @@
 flags:
   rewrite: false
 
+cert:
+  issuer: letsencrypt-prod-homelab
+  secretName: le-issuer-account-key-grafana
+
 service:
   name: grafana
+  subdomain: grafana
   port:
     number: 80
 
@@ -11,6 +16,7 @@ annotations:
   hajimari.io/appName: "grafana"
 
 ingress:
+  name: grafana
   subdomain: grafana
   routePath: /
 

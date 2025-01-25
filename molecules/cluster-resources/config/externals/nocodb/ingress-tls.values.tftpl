@@ -1,6 +1,10 @@
 flags:
   rewrite: false
 
+cert:
+  issuer: letsencrypt-prod-homelab
+  secretName: le-issuer-account-key-nocodb
+
 service:
   name: nocodb
   port:
@@ -11,6 +15,7 @@ annotations:
   hajimari.io/appName: "nocodb"
 
 ingress:
+  name: nocodb
   subdomain: nocodb
   routePath: /
 
