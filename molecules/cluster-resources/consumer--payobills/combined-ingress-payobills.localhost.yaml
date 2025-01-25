@@ -1,0 +1,48 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    nginx.ingress.kubernetes.io/preserve-trailing-slash: "true"
+    nginx.ingress.kubernetes.io/use-regex: "true"
+    nginx.ingress.kubernetes.io/enable-rewrite-log: "true"
+    nginx.ingress.kubernetes.io/rewrite-target: /$2
+  name: payobills-localhost
+  namespace: payobills
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: localhost
+    http:
+      paths:
+      - backend:
+          service:
+            name: payments
+            port:
+              number: 80
+        path: /payments-graphql(/|$)(.*)
+        pathType: ImplementationSpecific
+      - backend:
+          service:
+            name: bills
+            port:
+              number: 80
+        path: /bills-graphql(/|$)(.*)
+        pathType: ImplementationSpecific
+      - backend:
+          service:
+            name: files
+            port:
+              number: 80
+        path: /files(/|$)(.*)
+        pathType: ImplementationSpecific
+      - backend:
+          service:
+            name: payobills-ui
+            port:
+              number: 80
+        path: /()(.*)
+        pathType: ImplementationSpecific
+status:
+  loadBalancer:
+    ingress:
+    - ip: 192.168.0.184
