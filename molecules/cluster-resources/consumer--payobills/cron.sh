@@ -15,7 +15,7 @@ for cron in $(echo "${CONSUMER_PAYOBILLS_CRON_LIST}" | tr ',' '\n'); do
   export CONSUMER_PAYOBILLS_CRON_NOTION_DB_ID="${!CRON_NOTION_ID_ENVVAR_NAME}"
 
   # substitute environment variables using envsubst
-  envsubst < consumer--payobills/template-transaction-syncer-cron.yaml | kubectl delete -n payobills -f -
+  envsubst < consumer--payobills/template-transaction-syncer-cron.yaml | kubectl apply -n payobills -f -
 done
 
 set +e
