@@ -1,6 +1,10 @@
 flags:
   rewrite: false
 
+cert:
+  issuer: letsencrypt-prod-homelab
+  secretName: le-issuer-account-key-owncloud
+
 service:
   name: owncloud
   port:
@@ -11,6 +15,7 @@ annotations:
   hajimari.io/appName: "owncloud"
 
 ingress:
+  name: owncloud
   subdomain: owncloud
   routePath: /
 
