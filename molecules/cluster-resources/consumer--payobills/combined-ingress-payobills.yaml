@@ -42,6 +42,13 @@ spec:
       paths:
       - backend:
           service:
+            name: payobills-files
+            port:
+              number: 80
+        path: /files(/|$)(.*)
+        pathType: ImplementationSpecific
+      - backend:
+          service:
             name: payobills-payments
             port:
               number: 80

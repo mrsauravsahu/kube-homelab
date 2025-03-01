@@ -1,0 +1,29 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: transaction-parser
+spec:
+  schedule: "*/6 * * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+#          nodeSelector:
+#            kubernetes.io/hostname: pi
+          restartPolicy: Never
+          containers:
+          - name: cron
+            image: ghcr.io/payobills/tools/transaction-parser:0.3.2
+            imagePullPolicy: IfNotPresent
+            env:
+            - name: NOCODB_BASE_URL
+              value: http://nocodb.homelab.svc.cluster.local:8080
+            - name: NOCODB_INTEGRATION_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  key: token
+                  name: nocodb-token
+            - name: NOCODB_BASE_NAME
+              value: payobills
+            - name: NOCODB_TABLE_NAME
+              value: transactions
