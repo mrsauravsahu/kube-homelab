@@ -8,12 +8,10 @@ spec:
     spec:
       template:
         spec:
-#          nodeSelector:
-#            kubernetes.io/hostname: pi
           restartPolicy: Never
           containers:
           - name: cron
-            image: ghcr.io/payobills/tools/transaction-parser:0.3.2
+            image: ghcr.io/payobills/tools/transaction-parser:0.3.3
             imagePullPolicy: IfNotPresent
             env:
             - name: NOCODB_BASE_URL
