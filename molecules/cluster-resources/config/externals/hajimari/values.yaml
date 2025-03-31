@@ -1,3 +1,7 @@
+persistence:
+  data:
+    enabled: false
+
 hajimari:
   name: Sahu
   title: Sahu's Home Server
