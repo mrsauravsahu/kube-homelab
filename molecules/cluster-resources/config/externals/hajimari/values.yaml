@@ -3,7 +3,7 @@ persistence:
     enabled: false
 
 hajimari:
-  name: ""
+  name: Sahu
   title: Sahu's Home Server
   lightTheme: mrsauravsahu
   darkTheme: mrsauravsahu
