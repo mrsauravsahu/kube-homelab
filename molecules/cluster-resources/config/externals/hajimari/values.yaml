@@ -1,5 +1,9 @@
+persistence:
+  data:
+    enabled: false
+
 hajimari:
-  name: Sahu
+  name: ""
   title: Sahu's Home Server
   lightTheme: mrsauravsahu
   darkTheme: mrsauravsahu
