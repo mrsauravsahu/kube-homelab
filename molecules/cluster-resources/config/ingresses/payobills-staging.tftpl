@@ -1,0 +1,19 @@
+flags:
+  rewrite: false
+
+cert:
+  issuer: letsencrypt-staging
+  secretName: le-issuer-account-key-staging
+
+service:
+  name: payobills-ui
+  port:
+    number: 80
+
+ingress:
+  name: payobills-ui-staging
+  subdomain: payobills-staging
+  routePath: /
+
+hosts:
+- name: mrsauravsahu.in

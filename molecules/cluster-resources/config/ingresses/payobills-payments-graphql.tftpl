@@ -1,0 +1,21 @@
+flags:
+  rewrite: true
+
+cert:
+  issuer: letsencrypt-prod
+  secretName: le-issuer-payobills-cert
+
+service:
+  name: payments
+  port:
+    number: 80
+
+ingress:
+  name: payments-graphql
+  subdomain: payobills
+  routePath: /payments-graphql
+
+hosts:
+%{ for host in hosts ~}
+- name: ${host}
+%{ endfor ~}
