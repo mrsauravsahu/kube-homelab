@@ -38,13 +38,13 @@ resource "helm_release" "nocodb" {
   chart      = "./apps/nocodb"
   namespace  = "homelab"
   values = [file("./config/externals/nocodb/values.yaml")]
-  depends_on = [helm_release.pv_files]
+  depends_on = [helm_release.pv_files, helm_release.app_data_nocodb]
 }
 
 resource "helm_release" "nocodb_ingress" {
   name       = "nocodb-ingress"
-  chart      = "./lib/helm-chart-homelab-ingress"
+  chart      = "./lib/helm-chart-homelab-ingress-tls"
   namespace  = "homelab"
-  values = ["${templatefile("./config/externals/nocodb/ingress.values.tftpl", { hosts = var.cluster.hosts })}"]
+  values = ["${templatefile("./config/externals/nocodb/ingress-tls.values.tftpl", { hosts = var.cluster.hosts })}"]
   depends_on = [helm_release.nocodb]
 }
