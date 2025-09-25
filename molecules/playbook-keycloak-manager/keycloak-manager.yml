@@ -1,0 +1,28 @@
+---
+- name: Manage Keycloak instance
+  hosts: localhost
+  connection: local
+  gather_facts: no
+
+  vars:
+    keycloak_url: "{{ lookup('ansible.builtin.env', 'ANSIBLE__KEYCLOAK_HOST') }}"
+    keycloak_username: "{{ lookup('ansible.builtin.env', 'ANSIBLE__KEYCLOAK_BOT_USERNAME') }}"
+    keycloak_password: "{{ lookup('ansible.builtin.env', 'ANSIBLE__KEYCLOAK_BOT_PASSWORD') }}"
+    keycloak_realm: "{{ lookup('ansible.builtin.env', 'ANSIBLE__KEYCLOAK_REALM') }}"
+    keycloak_client_id: "admin-cli"
+
+  tasks:
+    - name: Get details about Keycloak Realm
+      community.general.keycloak_realm:
+        auth_client_id: "{{ keycloak_client_id }}"
+        auth_password: "{{ keycloak_password }}"
+        auth_username: "{{ keycloak_username }}"
+        auth_keycloak_url: "{{ keycloak_url }}"
+        auth_realm: master
+        realm: "{{ keycloak_realm }}"
+        state: present
+      register: realm_info
+
+    - name: Show realms
+      debug:
+        var: realm_info
