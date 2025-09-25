@@ -1,10 +1,10 @@
 replicaCount: 1
 
 owncloud:
-  domain: owncloud.192.168.0.100.nip.io
-  trustedDomains: owncloud.192.168.0.100.nip.io
+  domain: owncloud.mrsauravsahu.in
+  trustedDomains: 'owncloud.mrsauravsahu.in,pi.dory-char.ts.net'
   username: owncloud
-  password: owncloud
+  password: owncloud123
 
 mariadb:
   enabled: false
@@ -30,7 +30,7 @@ image:
   repository: docker.io/owncloud/server
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
-  tag: 10.13.1-arm64v8
+  tag: 10.15.0
 
 imagePullSecrets: []
 nameOverride: ""

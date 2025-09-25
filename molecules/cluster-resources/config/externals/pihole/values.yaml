@@ -104,12 +104,12 @@ serviceWeb:
     port: 80
 
     # -- Optional node port for the web HTTP service
-    nodePort: ""
+    nodePort: "30001"
 
   # -- Configuration for the HTTPS web interface listener
   https:
     # -- Generate a service for HTTPS traffic
-    enabled: true
+    enabled: false
 
     # -- The port of the web HTTPS service
     port: 443
@@ -118,7 +118,7 @@ serviceWeb:
     nodePort: ""
 
   # -- `spec.type` for the web interface Service
-  type: ClusterIP
+  type: NodePort
 
   # -- `spec.externalTrafficPolicy` for the web interface Service
   externalTrafficPolicy: Local
@@ -137,7 +137,7 @@ serviceWeb:
   extraLabels:
     {}
 
-virtualHost: pi.hole
+virtualHost: 192.168.0.184
 
 # -- Configuration for the Ingress
 ingress:

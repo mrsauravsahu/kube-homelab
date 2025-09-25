@@ -1,0 +1,18 @@
+flags:
+  rewrite: false
+
+cert:
+  issuer: letsencrypt-staging
+  secretName: le-issuer-account-key-staging
+
+service:
+  name: my-n8n
+  port:
+    number: 80
+
+ingress:
+  subdomain: n8n-np
+  routePath: /
+
+hosts:
+- name: mrsauravsahu.in

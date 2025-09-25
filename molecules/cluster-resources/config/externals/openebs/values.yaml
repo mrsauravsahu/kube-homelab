@@ -61,9 +61,9 @@ localprovisioner:
   imageTag: "3.4.0"
   replicas: 1
   upgradeStrategy: "Recreate"
-  basePath: "/homelab/drives/drive-2tb-1"
+  basePath: "/Users/Saurav_Sahu/homelab/drives/drive-2tb-1"
   nodeSelector:
-    kubernetes.io/hostname: pi
+    kubernetes.io/hostname: colima
   tolerations: []
   affinity: {}
   healthCheck:

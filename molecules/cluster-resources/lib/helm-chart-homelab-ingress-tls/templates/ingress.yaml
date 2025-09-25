@@ -1,0 +1,42 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: {{ $.Values.ingress.name }}
+  annotations:
+    cert-manager.io/issuer:  {{ $.Values.cert.issuer }} 
+    nginx.ingress.kubernetes.io/preserve-trailing-slash: "true"
+    {{- if $.Values.flags.rewrite }}
+    nginx.ingress.kubernetes.io/rewrite-target: /$2
+    {{- end }}
+    {{- if $.Values.annotations }}
+    {{- toYaml $.Values.annotations | nindent 4 }}
+    {{- end }}
+spec:
+  ingressClassName: nginx
+  rules:
+  {{- range $host := .Values.hosts }}
+  {{- if (($.Values.ingress).subdomain) }}
+  - host: {{ (printf "%s.%s" $.Values.ingress.subdomain $host.name) | quote }}
+  {{- else }}
+  - host: {{ $host.name | quote }}
+  {{- end }}
+    http:
+      paths:
+      - path: {{ $.Values.ingress.routePath }}
+        pathType: Prefix
+        backend:
+          service:
+            name: {{ $.Values.service.name }}
+            port:
+              number: {{ $.Values.service.port.number }}
+  {{- end }}
+  tls:
+  - hosts:
+  {{- range $host := .Values.hosts }}
+  {{- if (($.Values.ingress).subdomain) }}
+    - {{ (printf "%s.%s" $.Values.ingress.subdomain $host.name) | quote }}
+  {{- else }}
+    - {{ $host.name | quote }}
+  {{- end }}
+  {{- end }}
+    secretName: {{ $.Values.cert.secretName }}

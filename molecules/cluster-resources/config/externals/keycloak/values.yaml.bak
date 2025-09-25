@@ -1,0 +1,41 @@
+# image:
+#   repository: quay.io/keycloak/keycloak
+#   tag: "24.0"
+
+postgresql:
+  enabled: false
+
+# externalDatabase:
+#   host: postgresql--idp.homelab.svc.cluster.local
+#   user: postgres
+#   password: aDpz0PlLCd
+#   database: app
+#   port: 5432
+
+extraEnv: |
+  - name: KEYCLOAK_HOSTNAME
+    value: "idp.mrsauravsahu.in"
+  - name: KC_PROXY_HEADERS
+    value: "xforwarded"
+  - name: KC_DB_URL
+    value: "jdbc:postgresql://postgresql--idp.homelab.svc.cluster.local/app"
+  - name: KC_DB_USERNAME
+    value: "app"
+  - name: KC_DB_PASSWORD
+    value: "aDpz0PlLCd"
+
+# extraEnv: |
+#
+#   - name: KC_DB
+#     value: postgres
+#   - name: KC_DB_URL
+#     value: "jdbc:postgresql://keycloak-db-cluster-rw.homelab.svc.cluster.local/app"
+#   - name: KC_DB_USERNAME
+#     value: "app"
+#   - name: KC_DB_PASSWORD
+#     value: "J273G1jI1fkRNIgYQbZ1nKCvIjldsSTBUtWJq9Ouq3DOVlZeEzm8ysYod3UaCSqD"
+#   - name: KC_HOSTNAME
+#     value: "localhost"
+
+nodeSelector:
+  kubernetes.io/hostname: pi

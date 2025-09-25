@@ -60,6 +60,7 @@ variable "externals" {
     repo = string
     version = string
     namespace = optional(string)
+    chart_name = optional(string)
   }))
   default = [
     {

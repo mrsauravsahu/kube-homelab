@@ -634,7 +634,8 @@ monitoring:
     # -- Resource requests and limits for the canary
     resources: {}
     # -- Node selector for canary pods
-    nodeSelector: {}
+    nodeSelector:
+      kubernetes.io/hostname: pi
     # -- Tolerations for canary pods
     tolerations: []
     # -- Image to use for loki canary
@@ -651,7 +652,7 @@ monitoring:
 # Configuration for the write pod(s)
 write:
   # -- Number of replicas for the write
-  replicas: 3
+  replicas: 1
   image:
     # -- The Docker registry for the write image. Overrides `loki.image.registry`
     registry: null
@@ -701,7 +702,8 @@ write:
               {{- include "loki.writeSelectorLabels" . | nindent 10 }}
           topologyKey: kubernetes.io/hostname
   # -- Node selector for write pods
-  nodeSelector: {}
+  nodeSelector:
+    kubernetes.io/hostname: pi
   # -- Tolerations for write pods
   tolerations: []
   persistence:
@@ -772,7 +774,8 @@ tableManager:
                 {{- include "loki.tableManagerSelectorLabels" . | nindent 12 }}
             topologyKey: failure-domain.beta.kubernetes.io/zone
   # -- Node selector for table-manager pods
-  nodeSelector: {}
+  nodeSelector:
+    kubernetes.io/hostname: pi
   # -- Tolerations for table-manager pods
   tolerations: []
 
@@ -840,7 +843,8 @@ read:
               {{- include "loki.readSelectorLabels" . | nindent 10 }}
           topologyKey: kubernetes.io/hostname
   # -- Node selector for read pods
-  nodeSelector: {}
+  nodeSelector:
+    kubernetes.io/hostname: pi
   # -- Tolerations for read pods
   tolerations: []
   persistence:
@@ -908,7 +912,8 @@ backend:
               {{- include "loki.backendSelectorLabels" . | nindent 10 }}
           topologyKey: kubernetes.io/hostname
   # -- Node selector for backend pods
-  nodeSelector: {}
+  nodeSelector:
+    kubernetes.io/hostname: pi
   # -- Tolerations for backend pods
   tolerations: []
   persistence:
@@ -928,7 +933,7 @@ backend:
 # Configuration for the single binary node(s)
 singleBinary:
   # -- Number of replicas for the single binary
-  replicas: 1
+  replicas: 0
   autoscaling:
     # -- Enable autoscaling, this is only used if `queryIndex.enabled: true`
     enabled: false
@@ -983,7 +988,8 @@ singleBinary:
               {{- include "loki.singleBinarySelectorLabels" . | nindent 10 }}
           topologyKey: kubernetes.io/hostname
   # -- Node selector for single binary pods
-  nodeSelector: {}
+  nodeSelector:
+    kubernetes.io/hostname: pi
   # -- Tolerations for single binary pods
   tolerations: []
   persistence:
@@ -1126,7 +1132,8 @@ gateway:
               {{- include "loki.gatewaySelectorLabels" . | nindent 10 }}
           topologyKey: kubernetes.io/hostname
   # -- Node selector for gateway pods
-  nodeSelector: {}
+  nodeSelector:
+    kubernetes.io/hostname: pi
   # -- Tolerations for gateway pods
   tolerations: []
   # Gateway service configuration

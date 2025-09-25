@@ -68,6 +68,12 @@ externals = [
       namespace = "homelab"
     },
     {
+      name = "gpu-operator",
+      repo = "https://helm.ngc.nvidia.com/nvidia",
+      version = "v25.3.1",
+      namespace = "gpu-operator"
+    },
+    {
      name = "rabbitmq"
      repo = "https://charts.bitnami.com/bitnami"
      version = "12.6.1"

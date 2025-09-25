@@ -39,7 +39,7 @@ resource "helm_release" "owncloud" {
 
 resource "helm_release" "owncloud_ingress" {
   name       = "owncloud-ingress"
-  chart      = "./lib/helm-chart-homelab-ingress"
+  chart      = "./lib/helm-chart-homelab-ingress-tls"
   namespace  = "homelab"
   values = ["${templatefile("./config/externals/owncloud/ingress.values.tftpl", { hosts = var.cluster.hosts })}"]
   depends_on = [helm_release.owncloud]

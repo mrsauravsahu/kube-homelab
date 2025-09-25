@@ -1,0 +1,117 @@
+## This chart relies on the common library chart from bjw-s
+## You can find it at https://github.com/bjw-s/helm-charts/tree/923ef40a39520979c98f354ea23963ee54f54433/charts/library/common
+## Refer there for more detail about the supported values
+
+# These entries are shared between all the Immich components
+
+env:
+  REDIS_HOSTNAME: immich-redis-master.homelab-immich.svc.cluster.local
+  # REDIS_USERNAME: redis
+  # REDIS_PASSWORD: 
+  # DB_DATABASE_NAME: "{{ .Values.postgresql.global.postgresql.auth.database }}"
+  DB_HOSTNAME: "postgresql--immich.homelab-immich.svc.cluster.local"
+  # DB_HOSTNAME: "10-42-2-14.homelab-immich.pod.cluster.local"
+  DB_USERNAME: "postgres"
+  DB_DATABASE_NAME: "immichdb"
+  DB_PASSWORD: "33bbde0d229"
+  # # -- You should provide your own secret outside of this helm-chart and use `postgresql.global.postgresql.auth.existingSecret` to provide credentials to the postgresql instance
+  IMMICH_MACHINE_LEARNING_URL: '{{ printf "http://%s-machine-learning:3003" .Release.Name }}'
+
+image:
+  tag: v1.119.0
+
+immich:
+  nodeSelector:
+    kubernetes.io/hostname: pi
+  metrics:
+    # Enabling this will create the service monitors needed to monitor immich with the prometheus operator
+    enabled: false
+  persistence:
+    # Main data store for all photos shared between different components.
+    library:
+      # Automatically creating the library volume is not supported by this chart
+      # You have to specify an existing PVC to use
+      existingClaim: pvc-homelab-app-data-immich
+  # configuration is immich-config.json converted to yaml
+  # ref: https://immich.app/docs/install/config-file/
+  #
+  configuration: {}
+    # trash:
+    #   enabled: false
+    #   days: 30
+    # storageTemplate:
+    #   enabled: true
+    #   template: "{{y}}/{{y}}-{{MM}}-{{dd}}/{{filename}}"
+
+# Dependencies
+redis:
+  enabled: true
+  architecture: standalone
+  auth:
+    enabled: false
+
+# DEPRECATED
+# The postgres subchart is deprecated and will be removed in chart version 0.10.0
+# See https://github.com/immich-app/immich-charts/issues/149 for more detail.
+postgresql:
+  enabled: false
+  image:
+    repository: tensorchord/pgvecto-rs
+    tag: pg14-v0.2.0@sha256:739cdd626151ff1f796dc95a6591b55a714f341c737e27f045019ceabf8e8c52
+  global:
+    postgresql:
+      auth:
+        username: immich
+        database: immich
+        password: immich
+  primary:
+    containerSecurityContext:
+      readOnlyRootFilesystem: false
+    initdb:
+      scripts:
+        create-extensions.sql: |
+          CREATE EXTENSION cube;
+          CREATE EXTENSION earthdistance;
+          CREATE EXTENSION vectors;
+
+# Immich components
+
+server:
+  enabled: true
+  image:
+    repository: ghcr.io/immich-app/immich-server
+    pullPolicy: IfNotPresent
+  persistence:
+    externals:
+      enabled: true
+      type: pvc
+      existingClaim: pvc-homelab-app-data-immich-externals
+  ingress:
+    main:
+      enabled: false
+      annotations:
+        # proxy-body-size is set to 0 to remove the body limit on file uploads
+        nginx.ingress.kubernetes.io/proxy-body-size: "0"
+      hosts:
+        - host: immich.local
+          paths:
+            - path: "/"
+      tls: []
+
+machine-learning:
+  enabled: true
+  image:
+    repository: ghcr.io/immich-app/immich-machine-learning
+    pullPolicy: IfNotPresent
+  env:
+    TRANSFORMERS_CACHE: /cache
+  persistence:
+    cache:
+      enabled: true
+      # size: 10Gi
+      # Optional: Set this to pvc to avoid downloading the ML models every start.
+      type: pvc
+      # accessMode: ReadWriteMany
+      # size: 10Gi
+      existingClaim: pvc-homelab-app-data-immich--cache
+      # storageClass: your-class

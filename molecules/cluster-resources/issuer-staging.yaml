@@ -1,0 +1,20 @@
+apiVersion: cert-manager.io/v1
+kind: Issuer
+metadata:
+  name: letsencrypt-staging
+spec:
+  acme:
+    email: mrsauravsahu@outlook.com
+    server: https://acme-staging-v02.api.letsencrypt.org/directory
+    privateKeySecretRef:
+      name: le-issuer-account-key-staging
+    solvers:
+    - dns01:
+        cloudflare:
+          email: mrsauravsahu@outlook.com
+          apiKeySecretRef:
+            name: cloudflare-apikey-secret
+            key: apikey
+      selector:
+        dnsNames:
+        - "payobills-staging.mrsauravsahu.in"

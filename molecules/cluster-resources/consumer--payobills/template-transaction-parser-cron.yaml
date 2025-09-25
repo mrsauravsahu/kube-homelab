@@ -8,20 +8,35 @@ spec:
     spec:
       template:
         spec:
+          affinity:
+            nodeAffinity:
+              requiredDuringSchedulingIgnoredDuringExecution:
+                nodeSelectorTerms:
+                  - matchExpressions:
+                    - key: kubernetes.io/hostname
+                      operator: In
+                      values:
+                      - pi
+                      - pi5
+          containers:
           restartPolicy: Never
           containers:
           - name: cron
-            image: ghcr.io/payobills/tools/transaction-parser:0.3.3
-            imagePullPolicy: IfNotPresent
+            image: ghcr.io/payobills/tools/transaction-parser:0.3.5
+            imagePullPolicy: Always
             env:
-            - name: NOCODB_BASE_URL
+            - name: NOCODB__BASE_URL
               value: http://nocodb.homelab.svc.cluster.local:8080
-            - name: NOCODB_INTEGRATION_TOKEN
+            - name: NOCODB__INTEGRATION_TOKEN
               valueFrom:
                 secretKeyRef:
                   key: token
                   name: nocodb-token
-            - name: NOCODB_BASE_NAME
-              value: payobills
-            - name: NOCODB_TABLE_NAME
-              value: transactions
+            - name: NOCODB__BASE_NAME__CURRENCIES
+              value: "ppqwf0630ff5ie0"
+            - name: NOCODB__TABLE_NAME__CURRENCIES__HISTORICAL
+              value: "m80bahqoxl4l25k"
+            - name: NOCODB__TABLE_NAME__CURRENCIES__CURRENCIES
+              value: "mh2815f1o7yc3c2"
+            - name: RUST_BACKTRACE
+              value: "full"

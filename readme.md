@@ -62,3 +62,13 @@ I'm using Raspberry Pi 4 and Raspberry Pi 5 as the nodes on my Kubernetes cluste
 - Raspberry Pi 4 +  Raspberry Pi 5
 - Ubuntu Server 22.04
 - docker 20.10.12
+
+## tools
+
+### gpu-operator
+
+```bash
+helm upgrade --install --wait  -n gpu-operator --create-namespace \
+    gpu-operator nvidia/gpu-operator \
+    --version=v25.3.1 --set driver.enabled=true --set toolkit.enabled=true
+```

@@ -5,8 +5,6 @@ metadata:
     cert-manager.io/issuer: letsencrypt-prod
     hajimari.io/appName: payobills
     hajimari.io/enable: "true"
-    meta.helm.sh/release-name: nocodb-ingress
-    meta.helm.sh/release-namespace: homelab
     nginx.ingress.kubernetes.io/preserve-trailing-slash: "true"
     nginx.ingress.kubernetes.io/use-regex: "true"
     nginx.ingress.kubernetes.io/enable-rewrite-log: "true"
@@ -49,20 +47,27 @@ spec:
         pathType: ImplementationSpecific
       - backend:
           service:
-            name: payobills-payments
+            name: payobills-subgraph-payments
             port:
               number: 80
         path: /payments-graphql(/|$)(.*)
         pathType: ImplementationSpecific
       - backend:
           service:
-            name: payobills-bills
+            name: payobills-subgraph-bills
             port:
               number: 80
         path: /bills-graphql(/|$)(.*)
         pathType: ImplementationSpecific
         # path: /bills-graphql/graphql
         # pathType: Prefix
+      - backend:
+          service:
+            name: payobills-gateway
+            port:
+              number: 80
+        path: /gateway(/|$)(.*)
+        pathType: ImplementationSpecific
       - backend:
           service:
             name: payobills-ui

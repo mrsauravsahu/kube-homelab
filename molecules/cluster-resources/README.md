@@ -19,3 +19,5 @@ $ terraform output -json | jq -r '.kubeconfig.value."127.0.0.1"' > ../../config/
 ```
 
 This can be done by copying the your public ssh key-pair into the `~/.ssh/authorized_keys` file on the server.
+
+terraform plan -var-file mrsauravsahu.tfvars -refresh=false

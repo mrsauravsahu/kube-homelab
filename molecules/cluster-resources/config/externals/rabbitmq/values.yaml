@@ -952,7 +952,7 @@ persistence:
   ## @param persistence.mountPath The path the volume will be mounted at
   ## Note: useful when using custom RabbitMQ images
   ##
-  mountPath: /bitnami/rabbitmq/mnesia
+  mountPath: /opt/bitnami/rabbitmq/.rabbitmq/mnesia
   ## @param persistence.subPath The subdirectory of the volume to mount to
   ## Useful in dev environments and one PV for multiple services
   ##

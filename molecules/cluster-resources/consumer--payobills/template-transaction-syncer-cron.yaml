@@ -8,6 +8,16 @@ spec:
     spec:
       template:
         spec:
+          affinity:
+            nodeAffinity:
+              requiredDuringSchedulingIgnoredDuringExecution:
+                nodeSelectorTerms:
+                  - matchExpressions:
+                    - key: kubernetes.io/hostname
+                      operator: In
+                      values:
+                      - pi
+                      - pi5
 #          nodeSelector:
 #            kubernetes.io/hostname: pi
           restartPolicy: Never

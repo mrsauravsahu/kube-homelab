@@ -391,8 +391,7 @@ server:
   ## Node labels for Prometheus server pod assignment
   ## Ref: https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/
   ##
-  nodeSelector:
-    kubernetes.io/hostname: pi
+  nodeSelector: {}
 
   ## Pod affinity
   ##
@@ -762,7 +761,8 @@ serverFiles:
       - job_name: prometheus
         static_configs:
           - targets:
-            - localhost:9090
+            - 192.186.0.184:9090
+            - 192.186.0.186:9090
 
       # A scrape configuration for running Prometheus on a Kubernetes cluster.
       # This uses separate scrape configs for cluster components (i.e. API server, node)
@@ -1258,8 +1258,7 @@ prometheus-node-exporter:
   containerSecurityContext:
     allowPrivilegeEscalation: false
 
-  nodeSelector:
-    kubernetes.io/hostname: pi
+  nodeSelector: {}
 
 ## prometheus-pushgateway sub-chart configurable values
 ## Please see https://github.com/prometheus-community/helm-charts/tree/main/charts/prometheus-pushgateway

@@ -24,13 +24,3 @@ resource "kubernetes_namespace" "homelab" {
 
   provider = k8s
 }
-
-moved {
-  from = kubernetes_namespace.homelab_ns
-  to = kubernetes_namespace.homelab
-}
-
-moved {
-  from = kubernetes_namespace.homelab
-  to = kubernetes_namespace.homelab["production"]
-}
