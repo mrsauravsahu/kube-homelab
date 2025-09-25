@@ -1,0 +1,15 @@
+---
+- name: Write Hello World to a file
+  hosts: localhost
+  tasks:
+    - name: Create `out` directory
+      ansible.builtin.file:
+        path: out
+        state: directory
+        mode: '0755'
+
+    - name: Write Hello World
+      copy:
+        content: "Hello World\n"
+        dest: out/hello-world.txt
+
