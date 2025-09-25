@@ -12,7 +12,7 @@
     keycloak_client_id: "admin-cli"
 
   tasks:
-    - name: Get list of all realms
+    - name: Get details about Keycloak Realm
       community.general.keycloak_realm:
         auth_client_id: "{{ keycloak_client_id }}"
         auth_password: "{{ keycloak_password }}"
