@@ -1,0 +1,21 @@
+flags:
+  rewrite: false
+
+cert:
+  issuer: letsencrypt-prod-homelab
+  secretName: le-issuer-account-key-hajimari
+
+service:
+  name: hajimari
+  port:
+    number: 3000
+
+ingress:
+  name: hajimari
+  subdomain: homelab
+  routePath: /
+
+hosts:
+%{ for host in hosts ~}
+- name: ${host}
+%{ endfor ~}

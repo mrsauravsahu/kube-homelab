@@ -1,6 +1,10 @@
 flags:
   rewrite: false
 
+cert:
+  issuer: letsencrypt-prod-homelab
+  secretName: le-issuer-account-key-minio
+
 service:
   name: minio-console
   port:
@@ -11,6 +15,7 @@ annotations:
   hajimari.io/appName: "minio"
 
 ingress:
+  name: minio
   subdomain: minio
   routePath: /
 

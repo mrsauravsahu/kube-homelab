@@ -2,16 +2,12 @@ flags:
   rewrite: false
 
 service:
-  name: keycloak-http
+  name: ui
   port:
     number: 80
 
-annotations:
-  hajimari.io/enable: "true"
-  hajimari.io/appName: "idp"
-
 ingress:
-  subdomain: idp
+  subdomain: payobills
   routePath: /
 
 hosts:
