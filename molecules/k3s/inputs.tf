@@ -8,6 +8,16 @@ variable "servers" {
   default = []
 }
 
+variable "agents" {
+  description = "machines which will run the workloads"
+  type = list(object({
+    host = string
+    user = string
+    private_key = string
+  }))
+  default = []
+}
+
 variable "k3s" {
   type = object({
     download_url = optional(string),
