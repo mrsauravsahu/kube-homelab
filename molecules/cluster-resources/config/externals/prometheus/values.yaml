@@ -459,7 +459,7 @@ server:
     ## Prometheus server data Persistent Volume existing claim name
     ## Requires server.persistentVolume.enabled: true
     ## If defined, PVC must be created manually before volume will be bound
-    existingClaim: ""
+    existingClaim: "pvc-homelab-app-data-prometheus"
 
     ## Prometheus server data Persistent Volume mount root path
     ##
