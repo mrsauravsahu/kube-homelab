@@ -1,2 +1,70 @@
 postgresql:
   enabled: false
+
+tls:
+  enabled: false
+
+# production: true
+
+externalDatabase:
+  host: postgresql--keycloak.homelab-keycloak.svc.cluster.local
+  user: keycloak_user
+  password: "FILL(KUBE-HOMELAB)"
+  database: keycloak
+  port: 5432
+
+resources:
+  requests:
+    cpu: "0.5"
+    memory: "1024Mi"
+    ephemeral-storage: "50Mi"
+  limits:
+    cpu: "1.0"
+    memory: "2Gi"
+    ephemeral-storage: "2Gi"
+
+securityContext:
+  allowPrivilegeEscalation: false
+  readOnlyRootFilesystem: false
+  privileged: true
+  capabilities:
+    add: ["SYS_RESOURCE"]     # Needed to raise resource limits
+  runAsUser: 1000             # Keycloak default user
+  runAsNonRoot: true
+  ulimits:
+    - name: nofile
+      soft: 65536
+      hard: 65536
+    - name: nproc
+      soft: 65536
+      hard: 65536
+
+readinessProbe:
+  enabled: true
+  initialDelaySeconds: 180
+
+auth:
+  adminUser: admin
+  # TODO(kube-homelab): To be filled by user for now
+  # get this admin-password from a single creds file
+  adminPassword: ""
+
+extraEnvVars: 
+  - name: KC_PROXY
+    value: "edge"
+  - name: PROXY_ADDRESS_FORWARDING
+    value: "true"
+  # TODO(kube-homelab): FILL(KUBE-HOMELAB) To be filled by user for now
+  # get this admin-password from a single creds file
+  - name: KC_HOSTNAME
+    value: "idp.mrsauravsahu.in"
+  - name: KC_HOSTNAME_STRICT
+    value: "false"
+  - name: KC_HOSTNAME_STRICT_HTTPS
+    value: "true"
+  - name: KC_PROXY_HEADERS
+    value: "xforwarded"
+
+nodeSelector:
+  kubernetes.io/hostname: pi
+
