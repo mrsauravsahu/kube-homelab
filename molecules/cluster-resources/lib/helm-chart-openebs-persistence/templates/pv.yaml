@@ -4,6 +4,7 @@ kind: PersistentVolume
 metadata:
   name: {{ .Values.pv.name }}
 spec:
+  persistentVolumeReclaimPolicy: "Retain"
   storageClassName: {{ .Values.storageClassName }}
   capacity:
       storage: {{ .Values.storage }}
