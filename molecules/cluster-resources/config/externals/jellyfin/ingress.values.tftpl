@@ -1,0 +1,25 @@
+flags:
+  rewrite: false
+
+cert:
+  issuer: letsencrypt--prod-homelab
+  secretName: letsencrypt-prod-cert-secret-jellyfin
+
+service:
+  name: jellyfin
+  port:
+    number: 8096
+
+annotations:
+  hajimari.io/enable: "true"
+  hajimari.io/appName: "jellyfin"
+
+ingress:
+  name: media 
+  enableLocalDomains: "true"
+  subdomain: media 
+  routePath: /
+ 
+hosts:
+  - name: "mrsauravsahu.in"
+

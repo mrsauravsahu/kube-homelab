@@ -1,0 +1,46 @@
+helm upgrade --install -n homelab-jellyfin homelab-media ./lib/helm-chart-openebs-persistence -f - <<EOF
+
+storage: 100Gi
+storageClassName: openebs-hostpath
+pv:
+  enabled: true
+  name: pv-homelab-media
+  path: /homelab/drives/drive-2tb-1/media
+  accessModes:
+    - ReadWriteMany
+  nodeAffinity:
+    required:
+      nodeSelectorTerms:
+      - matchExpressions:
+        - key: kubernetes.io/hostname
+          operator: In
+          values:
+          - pi
+pvc:
+  enabled: true
+  name: pvc-homelab-media
+EOF
+
+--- 
+
+storage: 4Gi
+storageClassName: openebs-hostpath
+pv:
+  enabled: true
+  name: pv-homelab-app-data-jellyfin
+  path: /homelab/drives/drive-2tb-1/app-data/jellyfin
+  accessModes:
+    - ReadWriteMany
+  nodeAffinity:
+    required:
+      nodeSelectorTerms:
+      - matchExpressions:
+        - key: kubernetes.io/hostname
+          operator: In
+          values:
+          - pi
+pvc:
+  enabled: true
+  name: pvc-homelab-app-data-jellyfin
+
+
