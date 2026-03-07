@@ -45,6 +45,12 @@ databases = [
 
 externals = [
     {
+      name = "cert-manager"
+      repo = "https://charts.jetstack.io"
+      version = "1.14.5"
+      namespace = "cert-manager"
+    },
+    {
       name = "ingress-nginx"
       repo = "https://kubernetes.github.io/ingress-nginx"
       version = "4.4.0"
