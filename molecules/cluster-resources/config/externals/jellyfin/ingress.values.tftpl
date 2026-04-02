@@ -2,7 +2,7 @@ flags:
   rewrite: false
 
 cert:
-  issuer: letsencrypt--prod-homelab
+  issuer: letsencrypt-prod--homelab-jellyfin
   secretName: letsencrypt-prod-cert-secret-jellyfin
 
 service:
@@ -16,10 +16,9 @@ annotations:
 
 ingress:
   name: media 
-  enableLocalDomains: "true"
+  enableLocalDomains: "false"
   subdomain: media 
   routePath: /
  
 hosts:
   - name: "mrsauravsahu.in"
-
