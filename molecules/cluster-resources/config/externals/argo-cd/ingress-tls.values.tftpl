@@ -1,0 +1,23 @@
+flags:
+  rewrite: false
+
+cert:
+  issuer: letsencrypt-prod-homelab
+  secretName: le-issuer-account-key-homelab
+
+service:
+  name: argo-cd-argocd-server
+  port:
+    number: 80
+
+ingress:
+  enableLocalDomains: "true"
+  name: argo-cd
+  subdomain: argo
+  routePath: /
+
+hosts:
+%{ for host in hosts ~}
+- name: ${host}
+%{ endfor ~}
+

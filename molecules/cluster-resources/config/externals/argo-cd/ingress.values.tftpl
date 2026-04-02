@@ -1,20 +1,25 @@
 flags:
   rewrite: false
 
+cert:
+  issuer: letsencrypt-prod--argo-cd
+  secretName: letsencrypt-prod-cert-secret-argo-cd
+
 service:
   name: argo-cd-argocd-server
   port:
-    number: 443
+    number: 80
 
 annotations:
   hajimari.io/enable: "true"
   hajimari.io/appName: "argocd"
 
 ingress:
-  subdomain: argo
+  name: argo-cd
+  enableLocalDomain: "true"
   routePath: /
+  subdomain: argo
 
 hosts:
-%{ for host in hosts ~}
-- name: ${host}
-%{ endfor ~}
+  - name: "mrsauravsahu.in"
+
