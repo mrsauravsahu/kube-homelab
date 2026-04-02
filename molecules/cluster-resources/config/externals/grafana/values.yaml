@@ -309,7 +309,7 @@ extraContainerVolumes: []
 ##
 persistence:
   type: pvc
-  enabled: false
+  enabled: true
   # storageClassName: default
   accessModes:
     - ReadWriteOnce
@@ -321,7 +321,7 @@ persistence:
   ## Sub-directory of the PV to mount. Can be templated.
   # subPath: ""
   ## Name of an existing PVC. Can be templated.
-  # existingClaim:
+  existingClaim: "pvc-homelab-app-data-grafana"
   ## Extra labels to apply to a PVC.
   extraPvcLabels: {}
 
