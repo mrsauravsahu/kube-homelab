@@ -1,8 +1,12 @@
 flags:
   rewrite: false
 
+cert:
+  issuer: letsencrypt-prod--homelab-keycloak
+  secretName: le-issuer-account-key--homelab-keycloak--keycloak
+
 service:
-  name: keycloak-http
+  name: keycloak
   port:
     number: 80
 
@@ -11,10 +15,15 @@ annotations:
   hajimari.io/appName: "idp"
 
 ingress:
+  enableLocalDomains: "true"
+  name: keycloak
   subdomain: idp
   routePath: /
 
 hosts:
-%{ for host in hosts ~}
-- name: ${host}
-%{ endfor ~}
+  - name: mrsauravsahu.in
+  - name: 192.168.200.200.nip.io
+
+# %{ for host in hosts ~}
+#- name: ${host}
+# %{ endfor ~}
