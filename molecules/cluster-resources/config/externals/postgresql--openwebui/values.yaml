@@ -1,0 +1,20 @@
+deploymentType: local
+
+postgresql:
+  image:
+    repository: postgres
+    tag: "16-alpine"
+    pullPolicy: IfNotPresent
+
+    auth:
+      existingSecret: ""
+      username: "openwebui_user"
+      password: "{env:POSTGRESQL__OPENWEBUI__DB_PASSWORD}"
+      database: "openwebui"
+
+local:
+  replicaCount: 1
+  persistence: 
+    enabled: true
+    size: 8Gi
+    storageClass: ""

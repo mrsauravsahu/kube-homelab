@@ -1,0 +1,25 @@
+flags:
+  rewrite: false
+
+cert:
+  issuer: letsencrypt-prod--homelab-n8n
+  secretName: letsencrypt-prod-cert-secret-n8n
+
+service:
+  name: n8n
+  port:
+    number: 80
+
+annotations:
+  hajimari.io/enable: "true"
+  hajimari.io/appName: "n8n"
+
+ingress:
+  name: n8n
+  subdomain: n8n
+  routePath: /
+
+hosts:
+%{ for host in hosts ~}
+- name: ${host}
+%{ endfor ~}
