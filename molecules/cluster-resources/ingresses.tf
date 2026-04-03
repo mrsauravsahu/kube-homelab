@@ -1,10 +1,10 @@
 resource "helm_release" "ingresses" {
-  for_each     = {for app in var.ingresses : app.name => app if fileexists("./config/ingresses/${app.name}.tftpl")}
+  for_each     = {for app in var.externals : app.name => app if fileexists("./config/externals/${app.name}/ingress.values.tftpl")}
   name       = "${each.value.name}-ingress"
   chart      = "./lib/helm-chart-homelab-ingress"
   namespace  = each.value.namespace
 
-  values = ["${templatefile("./config/ingresses/${each.value.name}.tftpl", { hosts = var.cluster.hosts })}"]
+  values = ["${templatefile("./config/externals/${each.value.name}/ingress.values.tftpl", { hosts = var.cluster.hosts })}"]
 
   depends_on = [
     helm_release.external_apps

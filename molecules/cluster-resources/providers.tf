@@ -4,7 +4,7 @@ terraform {
   required_providers {
     helm = {
       source = "hashicorp/helm"
-      version = "2.6.0"
+      version = "3.0.1"
     }
 
     k8s = {
@@ -17,7 +17,7 @@ terraform {
 }
 
 provider "helm" {
-  kubernetes {
+  kubernetes = {
     config_path = var.cluster.config_path
   }
 }
