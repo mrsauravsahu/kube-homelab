@@ -1,0 +1,21 @@
+flags:
+  rewrite: false
+
+cert:
+  issuer: letsencrypt-prod--homelab-openwebui
+  secretName: le-issuer-account-key--homelab-openwebui--openwebui
+
+service:
+  name: open-webui
+  port:
+    number: 80
+
+ingress:
+  name: openwebui
+  subdomain: openwebui
+  routePath: /
+
+hosts:
+%{ for host in hosts ~}
+- name: ${host}
+%{ endfor ~}
