@@ -1,0 +1,26 @@
+apiVersion: cert-manager.io/v1
+kind: Issuer
+metadata:
+  name: letsencrypt-prod-homelab
+spec:
+  acme:
+    email: mrsauravsahu@outlook.com
+    server: https://acme-v02.api.letsencrypt.org/directory
+    privateKeySecretRef:
+      name: le-issuer-account-key-homelab
+    solvers:
+    - dns01:
+        cloudflare:
+          email: mrsauravsahu@outlook.com
+          apiTokenSecretRef:
+            name: cloudflare-apikey-secret
+            key: apikey
+      selector:
+        dnsNames:
+        - "local.grafana.mrsauravsahu.in"
+        - "local.homelab.mrsauravsahu.in"
+        - "local.idp.mrsauravsahu.in"
+        - "local.minio.mrsauravsahu.in"
+        - "local.nocodb.mrsauravsahu.in"
+        - "local.owncloud.mrsauravsahu.in"
+

@@ -1,13 +1,14 @@
 apiVersion: cert-manager.io/v1
 kind: Issuer
 metadata:
-  name: letsencrypt-prod--homelab-jellyfin
+  namespace: argo-cd
+  name: letsencrypt-prod--argo-cd
 spec:
   acme:
     email: mrsauravsahu@outlook.com
     server: https://acme-v02.api.letsencrypt.org/directory
     privateKeySecretRef:
-      name: le-issuer-account-key--homelab-jellyfin
+      name: le-issuer-account-key--argo-cd
     solvers:
     - dns01:
         cloudflare:
@@ -17,4 +18,5 @@ spec:
             key: apikey
       selector:
         dnsNames:
-        - "media.mrsauravsahu.in"
+        - "argo.mrsauravsahu.in"
+        - "argo.local.mrsauravsahu.in"
