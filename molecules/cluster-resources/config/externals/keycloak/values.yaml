@@ -9,7 +9,7 @@ tls:
 externalDatabase:
   host: postgresql--keycloak.homelab-keycloak.svc.cluster.local
   user: keycloak_user
-  password: "FILL(KUBE-HOMELAB)"
+  password: "{env:KEYCLOAK__DB_PASSWORD}"
   database: keycloak
   port: 5432
 
