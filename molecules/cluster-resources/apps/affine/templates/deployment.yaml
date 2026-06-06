@@ -1,0 +1,65 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: affine
+  namespace: {{ .Release.Namespace }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: affine
+  template:
+    metadata:
+      labels:
+        app: affine
+    spec:
+      nodeSelector:
+        {{- toYaml .Values.nodeSelector | nindent 8 }}
+      containers:
+        - name: affine
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          command: ["sh", "-c", "node ./scripts/self-host-predeploy && node ./dist/index.js"]
+          env:
+            - name: NODE_ENV
+              value: production
+            - name: AFFINE_CONFIG_PATH
+              value: /root/.affine/config
+            - name: REDIS_SERVER_HOST
+              value: affine-redis
+            - name: DATABASE_URL
+              valueFrom:
+                secretKeyRef:
+                  name: affine-postgres
+                  key: url
+            - name: AFFINE_SERVER_HTTPS
+              value: "false"
+            - name: AFFINE_SERVER_EXTERNAL_URL
+              value: {{ .Values.affine.externalUrl | quote }}
+          ports:
+            - name: http
+              containerPort: 3010
+          livenessProbe:
+            httpGet:
+              path: /
+              port: http
+            initialDelaySeconds: 60
+            periodSeconds: 15
+          readinessProbe:
+            httpGet:
+              path: /
+              port: http
+            initialDelaySeconds: 60
+            periodSeconds: 15
+          volumeMounts:
+            - name: affine-config
+              mountPath: /root/.affine/config
+            - name: affine-storage
+              mountPath: /root/.affine/storage
+      volumes:
+        - name: affine-config
+          persistentVolumeClaim:
+            claimName: affine-config
+        - name: affine-storage
+          persistentVolumeClaim:
+            claimName: {{ .Values.affine.storagePvc }}
