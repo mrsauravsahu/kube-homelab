@@ -9,7 +9,7 @@ nodeSelector:
 affine:
   externalUrl: "https://notes.mrsauravsahu.in"
   storagePvc: pvc-homelab-app-data-affine-storage
-  configStorage: 1Gi
+  configPvc: affine-config
 
 postgres:
   image: postgres:16-alpine

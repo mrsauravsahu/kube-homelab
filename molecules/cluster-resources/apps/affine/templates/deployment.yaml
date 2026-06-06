@@ -19,7 +19,7 @@ spec:
         - name: affine
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
-          command: ["sh", "-c", "node ./scripts/self-host-predeploy && node ./dist/index.js"]
+          command: ["sh", "-c", "node ./scripts/self-host-predeploy && node /app/dist/main.js"]
           env:
             - name: NODE_ENV
               value: production
@@ -59,7 +59,7 @@ spec:
       volumes:
         - name: affine-config
           persistentVolumeClaim:
-            claimName: affine-config
+            claimName: {{ .Values.affine.configPvc }}
         - name: affine-storage
           persistentVolumeClaim:
             claimName: {{ .Values.affine.storagePvc }}

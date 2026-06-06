@@ -15,5 +15,5 @@ pv:
           values:
           - pi
 pvc:
-  enabled: false
+  enabled: true
   name: affine-config
