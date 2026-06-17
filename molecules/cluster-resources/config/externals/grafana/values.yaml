@@ -660,6 +660,10 @@ dashboards:
       gnetId: "1860"
       revision: "29"
       datasource: prometheus
+    loki-dashboard:
+      gnetId: "13186"
+      revision: "1"
+      datasource: loki
     # some-dashboard:
     #   json: |
     #     $RAW_JSON
