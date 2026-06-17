@@ -1,0 +1,43 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: transaction-syncer-${CRON_KEBAB_LOWERED}
+spec:
+  schedule: "*/5 * * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+#          nodeSelector:
+#            kubernetes.io/hostname: pi
+          restartPolicy: Never
+          containers:
+          - name: cron
+            image: ghcr.io/payobills/tools/transaction-syncer:0.3.0
+            imagePullPolicy: IfNotPresent
+            env:
+            - name: NOCODB_TRANSACTION_TABLE_URL
+              value: 'http://nocodb.homelab.svc.cluster.local:8080/api/v1/db/data/nc/payobills/transactions'
+            - name: NOCODB_INTEGRATION_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: nocodb-token
+                  key: token
+            - name: NOTION_INTEGRATION_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: notion-token
+                  key: token
+            - name: NOTION_DB_ID
+              valueFrom:
+                secretKeyRef:
+                  name: cron-${CRON_KEBAB_LOWERED}-notion-db-id
+                  key: secret
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: cron-${CRON_KEBAB_LOWERED}-notion-db-id
+type: Opaque
+stringData:
+  secret: "${CONSUMER_PAYOBILLS_CRON_NOTION_DB_ID}"
