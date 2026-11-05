@@ -42,6 +42,8 @@ spec:
             value: {{ .Values.owncloud.username | quote }}
           - name: OWNCLOUD_ADMIN_PASSWORD
             value: {{ .Values.owncloud.password | quote }}
+          - name: OWNCLOUD_MAX_UPLOAD
+            value: {{ .Values.owncloud.maxUpload | default "20G" | quote }}
           {{- if .Values.mariadb.enabled }}
           - name: MARIADB_HOST
             value: {{ template "owncloud.mariadb.fullname" . }}
