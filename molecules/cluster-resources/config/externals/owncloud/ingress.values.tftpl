@@ -13,6 +13,10 @@ service:
 annotations:
   hajimari.io/enable: "true"
   hajimari.io/appName: "owncloud"
+  nginx.ingress.kubernetes.io/proxy-body-size: "0"
+  nginx.ingress.kubernetes.io/proxy-request-buffering: "off"
+  nginx.ingress.kubernetes.io/proxy-read-timeout: "600"
+  nginx.ingress.kubernetes.io/proxy-send-timeout: "600"
 
 ingress:
   name: owncloud
