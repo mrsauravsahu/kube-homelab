@@ -42,26 +42,28 @@ Apply: `k apply -f ai-readonly.yaml`
 ## 2. Build a separate kubeconfig with a short-lived token
 
 ```sh
-CTX=$(k config current-context); CL=$(k config view --minify -o jsonpath='{.contexts[0].context.cluster}')
+CL=$(k config view --minify -o jsonpath='{.contexts[0].context.cluster}')
 SERVER=$(k config view --minify -o jsonpath='{.clusters[0].cluster.server}')
 k config view --minify --raw -o jsonpath='{.clusters[0].cluster.certificate-authority-data}' | base64 -d > /tmp/ca.crt
 TOKEN=$(k -n ai-agent create token ai-readonly --duration=8h)
-export KUBECONFIG=~/.kube/ai-readonly.yaml
-k config set-cluster "$CL" --server="$SERVER" --certificate-authority=/tmp/ca.crt --embed-certs
-k config set-credentials ai-readonly --token="$TOKEN"
-k config set-context ai-readonly --cluster="$CL" --user=ai-readonly && k config use-context ai-readonly
-unset KUBECONFIG; chmod 600 ~/.kube/ai-readonly.yaml
+KC=~/.kube/ai-readonly.yaml   # never export KUBECONFIG here: --as checks need your admin config
+k --kubeconfig $KC config set-cluster "$CL" --server="$SERVER" --certificate-authority=/tmp/ca.crt --embed-certs
+k --kubeconfig $KC config set-credentials ai-readonly --token="$TOKEN"
+k --kubeconfig $KC config set-context ai-readonly --cluster="$CL" --user=ai-readonly
+k --kubeconfig $KC config use-context ai-readonly; chmod 600 $KC
 ```
 
 Hand the agent `KUBECONFIG=~/.kube/ai-readonly.yaml`, never your admin config.
 
 ## 3. Verify
 
+Run with your **admin** kubeconfig (`--as` needs impersonate rights; the SA gets Forbidden, which is expected). Then confirm as the SA: `KUBECONFIG=~/.kube/ai-readonly.yaml k get pods -A`.
+
 ```sh
 SA=system:serviceaccount:ai-agent:ai-readonly
-for v in "get secrets" "list secrets" "create pods" "create pods/exec" "patch deployments" \
-         "delete pvc" "create serviceaccounts/token" "update configmaps"; do
-  echo "$v: $(k auth can-i $v -A --as=$SA)"; done          # all must be "no"
+printf '%s\n' "get secrets" "list secrets" "create pods" "create pods/exec" "patch deployments" \
+  "delete pvc" "create serviceaccounts/token" "update configmaps" |
+while read -r verb res; do echo "$verb $res: $(k auth can-i "$verb" "$res" -A --as=$SA)"; done  # all "no"
 k auth can-i get pods -A --as=$SA                          # yes
 k get clusterrole view -o yaml | grep -n secrets           # must print nothing
 k auth can-i --list --as=$SA | grep -vE '\[(get|list|watch|get list watch|get list|list watch)\]' # only header + selfsubject*reviews [create] (default, harmless)
