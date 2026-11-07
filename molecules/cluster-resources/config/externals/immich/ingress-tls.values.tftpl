@@ -1,0 +1,25 @@
+flags:
+  rewrite: false
+
+cert:
+  issuer: letsencrypt-prod--homelab-immich
+  secretName: letsencrypt-prod-cert-secret-immich
+
+service:
+  name: immich-server
+  port:
+    number: 2283
+
+annotations:
+  hajimari.io/enable: "true"
+  hajimari.io/appName: "immich"
+
+ingress:
+  name: immich
+  subdomain: photos
+  routePath: /
+
+hosts:
+%{ for host in hosts ~}
+- name: ${host}
+%{ endfor ~}
