@@ -97,8 +97,8 @@ diagnosticMode:
 ##
 image:
   registry: docker.io
-  repository: postgres
-  tag: "16.0"
+  repository: bitnami/postgresql
+  tag: "16.6.0-debian-12-r2"
   digest: ""
   ## Specify a imagePullPolicy
   ## Defaults to 'Always' if image tag is 'latest', else set to 'IfNotPresent'
