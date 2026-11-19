@@ -1,0 +1,20 @@
+storage: 10Gi
+storageClassName: openebs-hostpath
+pv:
+  enabled: true
+  name: pv-homelab-app-data-affine-storage
+  path: /homelab/drives/drive-2tb-1/app-data/affine/storage
+  accessModes:
+    - ReadWriteMany
+  nodeAffinity:
+    required:
+      nodeSelectorTerms:
+      - matchExpressions:
+        - key: kubernetes.io/hostname
+          operator: In
+          values:
+          - pi
+pvc:
+  enabled: true
+  name: pvc-homelab-app-data-affine-storage
+

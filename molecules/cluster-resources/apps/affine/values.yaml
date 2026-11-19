@@ -1,0 +1,27 @@
+image:
+  repository: ghcr.io/toeverything/affine
+  tag: stable
+  pullPolicy: IfNotPresent
+
+nodeSelector:
+  kubernetes.io/hostname: pi
+
+affine:
+  externalUrl: "https://notes.mrsauravsahu.in"
+  storagePvc: pvc-homelab-app-data-affine-storage
+  configPvc: affine-config
+
+postgres:
+  image: postgres:16-alpine
+  pvc: pvc-homelab-app-data-affine-postgres
+  database: affine
+  username: affine
+  password: ""
+
+redis:
+  image: redis:7.4-alpine
+
+ingress:
+  host: notes.mrsauravsahu.in
+  tlsSecretName: letsencrypt-prod-cert-secret-affine
+  issuerName: letsencrypt-prod--homelab-affine

@@ -1,0 +1,6 @@
+apiVersion: v2
+name: affine
+description: A Helm chart for Affine self-hosted
+type: application
+version: 0.1.0
+appVersion: stable
