@@ -24,7 +24,7 @@ paperless:
   extraEnv: []
 
 database:
-  host: postgresql--paperless-ngx.homelab-paperless-ngx.svc.cluster.local
+  host: postgresql--paperless-ngx.homelab--paperless-ngx.svc.cluster.local
   port: 5432
   name: paperless
   user: paperless_user

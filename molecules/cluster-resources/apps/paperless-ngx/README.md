@@ -1,7 +1,7 @@
 # Paperless-ngx
 
 Self-hosted [Paperless-ngx](https://docs.paperless-ngx.com) at `paperless.mrsauravsahu.in`,
-in namespace `homelab-paperless-ngx`. Deployed with `helm` directly (no terraform).
+in namespace `homelab--paperless-ngx`. Deployed with `helm` directly (no terraform).
 
 | Release | Chart | Values |
 | --- | --- | --- |
@@ -31,22 +31,22 @@ sudo chown -R 1000:1000 /homelab/drives/drive-2tb-1/app-data/paperless-ngx
 ## 2. Namespace, secrets, cert issuer
 
 ```bash
-kubectl create namespace homelab-paperless-ngx
+kubectl create namespace homelab--paperless-ngx
 
-kubectl -n homelab-paperless-ngx create secret generic postgresql--paperless-ngx \
+kubectl -n homelab--paperless-ngx create secret generic postgresql--paperless-ngx \
   --from-literal=postgres-password="$(openssl rand -base64 24)" \
   --from-literal=password="$(openssl rand -base64 24)"
 
-kubectl -n homelab-paperless-ngx create secret generic paperless-ngx \
+kubectl -n homelab--paperless-ngx create secret generic paperless-ngx \
   --from-literal=secret-key="$(openssl rand -base64 48)" \
   --from-literal=admin-user=admin \
   --from-literal=admin-password='<choose-one>'
 
 kubectl get secret cloudflare-apikey-secret -n homelab -o yaml | \
-  sed 's/namespace: homelab$/namespace: homelab-paperless-ngx/' | \
+  sed 's/namespace: homelab$/namespace: homelab--paperless-ngx/' | \
   grep -vE '^\s+(resourceVersion|uid|creationTimestamp):' | kubectl apply -f -
 
-kubectl apply -n homelab-paperless-ngx -f cert-issuers/issuer-prod--homelab-paperless-ngx.yaml
+kubectl apply -n homelab--paperless-ngx -f cert-issuers/issuer-prod--homelab-paperless-ngx.yaml
 ```
 
 `admin-user` / `admin-password` only create the superuser on first start. You can delete
@@ -55,7 +55,7 @@ those keys afterwards.
 ## 3. Install
 
 ```bash
-NS=homelab-paperless-ngx
+NS=homelab--paperless-ngx
 
 helm upgrade --install homelab-app-data-postgresql--paperless-ngx ./lib/helm-chart-openebs-persistence \
   -n $NS -f config/externals/postgresql--paperless-ngx/pv.values.yaml
@@ -84,7 +84,7 @@ kubectl -n $NS logs deploy/paperless-ngx -f
 Bump `image.tag` in `apps/paperless-ngx/values.yaml`, then:
 
 ```bash
-helm upgrade paperless-ngx ./apps/paperless-ngx -n homelab-paperless-ngx \
+helm upgrade paperless-ngx ./apps/paperless-ngx -n homelab--paperless-ngx \
   --reuse-values -f config/externals/paperless-ngx/values.yaml
 ```
 
@@ -92,5 +92,5 @@ helm upgrade paperless-ngx ./apps/paperless-ngx -n homelab-paperless-ngx \
 
 - DNS: point `paperless.mrsauravsahu.in` at the ingress, like the other subdomains.
 - Drop files into `app-data/paperless-ngx/consume` on `pi` and Paperless ingests them.
-- Backups: `kubectl -n homelab-paperless-ngx exec deploy/paperless-ngx -- document_exporter ../export`
+- Backups: `kubectl -n homelab--paperless-ngx exec deploy/paperless-ngx -- document_exporter ../export`
   writes to `app-data/paperless-ngx/export`.
