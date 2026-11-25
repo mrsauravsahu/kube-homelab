@@ -13,3 +13,10 @@ plan.json
 
 /config/*
 !/config/.gitkeep
+
+# agent worktrees
+/w
+
+# rendered by env-substituter.sh
+*.local.yaml
+*.local.yml
