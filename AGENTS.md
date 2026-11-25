@@ -31,7 +31,9 @@ Run helm commands from `molecules/cluster-resources` so the `./lib` and `./apps`
 
 ## Adding an app
 
-1. Namespace `homelab-<app>`.
+1. Namespace `homelab--<app>` (e.g. `homelab--paperless-ngx`). `--` joins a part to what it
+   belongs to, as in `postgresql--<app>`. Older apps still use `homelab-<app>` (`homelab-immich`,
+   `homelab-keycloak`) and will be migrated later; don't rename them as a side effect.
 2. **Storage:** a `local` PV + PVC via `lib/helm-chart-openebs-persistence`, pinned to node `pi`,
    at `/homelab/drives/drive-2tb-1/app-data/<app>`. Release name `homelab-app-data-<app>`,
    PV `pv-homelab-app-data-<app>`, PVC `pvc-homelab-app-data-<app>`.
