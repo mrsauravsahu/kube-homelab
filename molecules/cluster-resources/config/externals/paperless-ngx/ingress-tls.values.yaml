@@ -1,0 +1,28 @@
+# Values for lib/helm-chart-homelab-ingress-tls (release: paperless-ngx-ingress).
+flags:
+  rewrite: false
+
+cert:
+  issuer: letsencrypt-prod--homelab-paperless-ngx
+  secretName: letsencrypt-prod-cert-secret-paperless-ngx
+
+service:
+  name: paperless-ngx
+  port:
+    number: 8000
+
+annotations:
+  hajimari.io/enable: "true"
+  hajimari.io/appName: "paperless"
+  nginx.ingress.kubernetes.io/proxy-body-size: "0"
+  nginx.ingress.kubernetes.io/proxy-request-buffering: "off"
+  nginx.ingress.kubernetes.io/proxy-read-timeout: "600"
+  nginx.ingress.kubernetes.io/proxy-send-timeout: "600"
+
+ingress:
+  name: paperless-ngx
+  subdomain: paperless
+  routePath: /
+
+hosts:
+- name: mrsauravsahu.in
