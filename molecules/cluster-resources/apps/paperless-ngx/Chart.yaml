@@ -1,0 +1,6 @@
+apiVersion: v2
+name: paperless-ngx
+description: Paperless-ngx document management, with a Redis broker. Uses an external PostgreSQL (postgresql--paperless-ngx).
+type: application
+version: 0.1.0
+appVersion: "3.5.1"

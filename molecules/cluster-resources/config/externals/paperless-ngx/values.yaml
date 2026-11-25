@@ -1,0 +1,3 @@
+# Overrides for apps/paperless-ngx. Defaults live in the chart's values.yaml.
+paperless:
+  url: https://paperless.mrsauravsahu.in

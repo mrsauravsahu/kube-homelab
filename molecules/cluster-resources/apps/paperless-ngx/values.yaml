@@ -1,0 +1,43 @@
+image:
+  repository: ghcr.io/paperless-ngx/paperless-ngx
+  tag: "3.5.1"
+  pullPolicy: IfNotPresent
+
+nodeSelector:
+  kubernetes.io/hostname: pi
+
+service:
+  port: 8000
+
+paperless:
+  # Public URL, used for CSRF / allowed hosts.
+  url: https://paperless.mrsauravsahu.in
+  timeZone: Asia/Kolkata
+  ocrLanguage: eng
+  # UID/GID that owns files on the host drive.
+  usermapUid: "1000"
+  usermapGid: "1000"
+  # Secret with keys: secret-key, admin-user, admin-password
+  existingSecret: paperless-ngx
+  # One PVC, mounted with subPaths data/, media/, consume/, export/
+  pvc: pvc-homelab-app-data-paperless-ngx
+  extraEnv: []
+
+database:
+  host: postgresql--paperless-ngx.homelab--paperless-ngx.svc.cluster.local
+  port: 5432
+  name: paperless
+  user: paperless_user
+  # Secret created for the postgresql--paperless-ngx release; key holds paperless_user's password
+  existingSecret: postgresql--paperless-ngx
+  passwordKey: password
+
+redis:
+  image: redis:7-alpine
+
+resources:
+  requests:
+    cpu: 250m
+    memory: 512Mi
+  limits:
+    memory: 2Gi

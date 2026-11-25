@@ -1,0 +1,39 @@
+# Overrides for the bitnami postgresql chart (release: postgresql--paperless-ngx).
+# Credentials come from the existing secret "postgresql--paperless-ngx"
+# (keys: postgres-password, password), created before install. See apps/paperless-ngx/README.md.
+fullnameOverride: postgresql--paperless-ngx
+
+global:
+  security:
+    allowInsecureImages: true
+  postgresql:
+    auth:
+      username: paperless_user
+      database: paperless
+      existingSecret: postgresql--paperless-ngx
+
+image:
+  # bitnami/* images moved to bitnamilegacy/* (Aug 2025)
+  registry: docker.io
+  repository: bitnamilegacy/postgresql
+  tag: "16.6.0-debian-12-r2"
+
+architecture: standalone
+
+primary:
+  nodeSelector:
+    kubernetes.io/hostname: pi
+  persistence:
+    enabled: true
+    existingClaim: pvc-homelab-app-data-postgresql--paperless-ngx
+    storageClass: openebs-hostpath
+  resources:
+    requests:
+      cpu: 100m
+      memory: 256Mi
+    limits:
+      memory: 1Gi
+
+# Host dir is chowned to 1001 by hand (see apps/paperless-ngx/README.md), like postgresql--immich.
+volumePermissions:
+  enabled: false
