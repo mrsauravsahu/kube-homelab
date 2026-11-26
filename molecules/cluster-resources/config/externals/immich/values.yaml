@@ -67,7 +67,7 @@ postgresql:
       auth:
         username: immich
         database: immich
-        password: immich
+        password: "{secret:IMMICH__DB_PASSWORD}"
   primary:
     containerSecurityContext:
       readOnlyRootFilesystem: false

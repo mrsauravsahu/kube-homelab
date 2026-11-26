@@ -557,9 +557,9 @@ postgresql:
   architecture: standalone
   auth:
     database: open-webui
-    postgresPassword: 0p3n-w3bu!
+    postgresPassword: "{secret:OPENWEBUI__POSTGRES_ADMIN_PASSWORD}"
     username: open-webui
-    password: 0p3n-w3bu!
+    password: "{secret:OPENWEBUI__DB_PASSWORD}"
   primary:
     persistence:
       size: 1Gi

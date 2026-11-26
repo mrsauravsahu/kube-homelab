@@ -53,8 +53,11 @@ Run helm commands from `molecules/cluster-resources` so the `./lib` and `./apps`
 
 - Never commit passwords, tokens, or keys. Read them from an existing secret (`existingSecret`,
   `secretKeyRef`) that the user creates with `kubectl create secret`.
-- If a value file needs a secret inline, use a `{env:VAR}` placeholder and render it with
-  `env-substituter.sh` (writes `*.local.yaml`; don't commit those).
+- If a value file needs a secret inline, use a `{secret:APP__FIELD}` placeholder (uppercase,
+  `[A-Z0-9_]`) and add the same key, empty, to `secrets.example.yaml`. All secret values live in
+  one gitignored file, `secrets.yaml` at the repo root. Render with
+  `./env-substituter.sh <file>` (writes `*.local.yaml`, gitignored). `./env-substituter.sh --check`
+  must pass; `git grep -n '{secret:'` finds every placeholder.
 - Passwords already leaked on branch `chore/local-stuff`. Don't copy values from it without
   removing the credentials.
 

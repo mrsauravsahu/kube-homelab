@@ -263,7 +263,7 @@ affinity:
           - pi
 
 # -- Administrator password when not using an existing secret (see below)
-adminPassword: "admin"
+adminPassword: "{secret:PIHOLE__ADMIN_PASSWORD}"
 
 # -- Use an existing secret for the admin password.
 admin:

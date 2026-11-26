@@ -20,3 +20,6 @@ plan.json
 # rendered by env-substituter.sh
 *.local.yaml
 *.local.yml
+
+# all secrets, filled from secrets.example.yaml (see env-substituter.sh)
+/secrets.yaml

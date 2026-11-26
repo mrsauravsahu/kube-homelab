@@ -88,7 +88,7 @@ runtimeClassName: ""
 ## Distributed MinIO ref: https://min.io/docs/minio/linux/operations/install-deploy-manage/deploy-minio-multi-node-multi-drive.html
 ##
 rootUser: "root"
-rootPassword: "rootPassword123"
+rootPassword: "{secret:MINIO__ROOT_PASSWORD}"
 
 ## Use existing Secret that store following variables:
 ##
