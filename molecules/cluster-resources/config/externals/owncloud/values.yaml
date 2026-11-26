@@ -4,7 +4,7 @@ owncloud:
   domain: owncloud.mrsauravsahu.in
   trustedDomains: owncloud.mrsauravsahu.in
   username: owncloud
-  password: owncloud
+  password: "{secret:OWNCLOUD__ADMIN_PASSWORD}"
 
 mariadb:
   enabled: false
@@ -15,7 +15,7 @@ externalDatabase:
   port: 3306
   name: owncloud
   user: owncloud
-  password: owncloud
+  password: "{secret:OWNCLOUD__DB_PASSWORD}"
 
 persistence:
   enabled: true

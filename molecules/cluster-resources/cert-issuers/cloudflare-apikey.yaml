@@ -4,4 +4,4 @@ metadata:
   name: cloudflare-apikey-secret
 type: Opaque
 stringData:
-  apikey: "{env:ISSUER__SECRET}"
+  apikey: "{secret:ISSUER__SECRET}"

@@ -9,7 +9,7 @@ postgresql:
     auth:
       existingSecret: ""
       username: "openwebui_user"
-      password: "{env:POSTGRESQL__OPENWEBUI__DB_PASSWORD}"
+      password: "{secret:POSTGRESQL__OPENWEBUI__DB_PASSWORD}"
       database: "openwebui"
 
 local:

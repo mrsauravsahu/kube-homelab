@@ -82,8 +82,8 @@ extraEnvs:
   NC_PUBLIC_URL: https:/nocodb.local.org
 
 extraSecretEnvs:
-  NC_AUTH_JWT_SECRET: secretString
-  NC_DB: "pg://postgresql.homelab.svc.cluster.local:5432?u=nocodb_user&p=nocodb_password&d=nocodb"
+  NC_AUTH_JWT_SECRET: "{secret:NOCODB__JWT_SECRET}"
+  NC_DB: "pg://postgresql.homelab.svc.cluster.local:5432?u=nocodb_user&p={secret:NOCODB__DB_PASSWORD}&d=nocodb"
 
 storage:
   # If disabled, another persistent storage should be configured for attachments to work.
@@ -99,7 +99,7 @@ postgresql:
   auth:
     database: nocodb
     username: nocodb
-    password: secretPass
+    password: "{secret:NOCODB__DB_PASSWORD}"
   persistence:
     size: 8Gi
 
@@ -108,7 +108,7 @@ mysql:
   auth:
     database: nocodb
     username: nocodb
-    password: secretPass
+    password: "{secret:NOCODB__DB_PASSWORD}"
   persistence:
     enabled: false
     size: 8Gi

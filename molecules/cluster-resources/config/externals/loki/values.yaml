@@ -1270,7 +1270,7 @@ minio:
   # Since we only have 1 replica, that means 2 drives must be used.
   drivesPerNode: 2
   rootUser: enterprise-logs
-  rootPassword: supersecret
+  rootPassword: "{secret:LOKI__MINIO_ROOT_PASSWORD}"
   buckets:
     - name: chunks
       policy: none
