@@ -1,0 +1,80 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    cert-manager.io/issuer: letsencrypt-prod
+    hajimari.io/appName: payobills
+    hajimari.io/enable: "true"
+    meta.helm.sh/release-name: nocodb-ingress
+    meta.helm.sh/release-namespace: homelab
+    nginx.ingress.kubernetes.io/preserve-trailing-slash: "true"
+    nginx.ingress.kubernetes.io/use-regex: "true"
+    nginx.ingress.kubernetes.io/enable-rewrite-log: "true"
+    # nginx.ingress.kubernetes.io/default-backend: payobills-ui
+    nginx.ingress.kubernetes.io/rewrite-target: /$2
+    # nginx.ingress.kubernetes.io/configuration-snippet: |-
+    #   rewrite /payments-graphql(/|$)(.*) /graphql last;
+    #   rewrite /bills-graphql(/|$)(.*) /$2 last;
+    # nginx.ingress.kubernetes.io/configuration-snippet: |
+    #   if ($request_uri ~* ^/payments-graphql(/|$)(.*)) {
+    #     rewrite ^/payments-graphql(/|$)(.*) /graphql last;
+    #   }
+    #   if ($request_uri ~* ^/bills-graphql(/|$)(.*)) {
+    #     rewrite ^/bills-graphql(/|$)(.*) /graphql last;
+    #   }
+    # nginx.ingress.kubernetes.io/configuration-snippet: |
+    #   location ~* ^/payments-graphql(/|$)(.*) {
+    #     rewrite ^/payments-graphql(/|$)(.*) /graphql break;
+    #     # proxy_pass http://payments.payobills.svc.cluster.local;
+    #   }
+    #   location ~* ^/bills-graphql(/|$)(.*) {
+    #     rewrite ^/bills-graphql(/|$)(.*) /graphql break;
+    #     # proxy_pass http://bills.payobills.svc.cluster.local;
+    #   }
+
+  name: payobills
+  namespace: payobills
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: payobills.mrsauravsahu.in
+    http:
+      paths:
+      - backend:
+          service:
+            name: payobills-files
+            port:
+              number: 80
+        path: /files(/|$)(.*)
+        pathType: ImplementationSpecific
+      - backend:
+          service:
+            name: payobills-payments
+            port:
+              number: 80
+        path: /payments-graphql(/|$)(.*)
+        pathType: ImplementationSpecific
+      - backend:
+          service:
+            name: payobills-bills
+            port:
+              number: 80
+        path: /bills-graphql(/|$)(.*)
+        pathType: ImplementationSpecific
+        # path: /bills-graphql/graphql
+        # pathType: Prefix
+      - backend:
+          service:
+            name: payobills-ui
+            port:
+              number: 80
+        path: /()(.*)
+        pathType: ImplementationSpecific
+  tls:
+  - hosts:
+    - payobills.mrsauravsahu.in
+    secretName: le-issuer-account-key-payobills
+status:
+  loadBalancer:
+    ingress:
+    - ip: 192.168.0.184

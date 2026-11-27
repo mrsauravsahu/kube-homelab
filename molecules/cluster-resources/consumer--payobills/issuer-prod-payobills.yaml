@@ -1,0 +1,20 @@
+apiVersion: cert-manager.io/v1
+kind: Issuer
+metadata:
+  name: letsencrypt-prod
+spec:
+  acme:
+    email: mrsauravsahu@outlook.com
+    server: https://acme-v02.api.letsencrypt.org/directory
+    privateKeySecretRef:
+      name: le-issuer-account-key
+    solvers:
+    - dns01:
+        cloudflare:
+          email: mrsauravsahu@outlook.com
+          apiTokenSecretRef:
+            name: cloudflare-apikey-secret
+            key: apikey
+      selector:
+        dnsNames:
+        - "payobills.mrsauravsahu.in"
